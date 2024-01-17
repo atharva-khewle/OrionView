@@ -31,4 +31,4 @@ mongoose.connect(`mongodb+srv://avk:${Authinfo.mongoatlaspassfun()}@orionviewdb.
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.error("MongoDB connection error:", err));
 
-app.listen(3001, ()=>{console.log("Server Started lets goooooooooooooooooo")});
+app.listen(3001, ()=>{console.log("Server Started at 3001. lets goooooooooooooooooo")});

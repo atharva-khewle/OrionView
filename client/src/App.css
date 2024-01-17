@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&family=Tektur:wght@900&display=swap');
+
+
+.navbar{
+    height: 60px;
+    /* background-color: #dd0f0f80; */
+    background-color: #11111180;
+    padding: 0px;
+    display: flex;
+    align-items: center;
+    max-width: 1100px;
+    padding-left: 20px;
+    padding-right: 20px;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+.canvas{
+    background-color: #151515;
+    color: white;
+    width: 100vw;
+    align-items: center;
+}
+.navlogo{
+    font-family: 'Tektur', sans-serif;
+    font-size: 30px;
+}
+.navbaritems{
+    display: flex;
+    flex-direction: row;
+    font-size: 19px;
+    width: 200px;
+    justify-content: space-between;
+}
+.dropdownfile{
+    
+    position: absolute;
+    display: none;
+    right: 10px;
+    top: 59px;
+    padding: 10px;
+    justify-content: space-around;
+    width: 50px;
+    border-radius: 0px 0px 3px 3px;
+    border-bottom: 0.5px solid rgb(63, 63, 63);
+    border-right: 0.5px solid rgb(63, 63, 63);
+    border-left: 0.5px solid rgb(63, 63, 63);
+    align-items: center;
+    background-color: #151515;
+}
+
+.visible {
+    display: block;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  .navvspace{
+    height: 8px;
+  }
+.navcenterer{
+    display: flex;
+    /* width: 100vh; */
+    justify-content: center;
+    border-bottom: 1px solid rgb(43, 43, 43);
+    align-items: center;
+
+}
+
+.pageview{
+    width: 1090px;
+    display: flex;
+    padding: 20px;
+}
+
+.centerpageview{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+body{
+    background-color: #151515;
+}
+.carouselview{
+    width:50vw;
+}
