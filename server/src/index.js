@@ -14,6 +14,7 @@ import mongoose from 'mongoose';
 
 import { UserRouter } from "./routes/usersjs.js"
 import { xkcdRouter } from "./routes/xkcd.js";
+import { popularMoviesRouter } from "./routes/popularmovies.js";
 
 const app = express()
 
@@ -24,6 +25,8 @@ app.use(cors());
 
 //data in /auth
 app.use("/auth",UserRouter);
+
+app.use("/popularmovies",popularMoviesRouter)
 
 app.use("/xkcd",xkcdRouter);
 
