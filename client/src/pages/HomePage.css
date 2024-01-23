@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&family=Tektur:wght@900&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+}
+p{
+    margin: 0;
+    padding: 0;
+}
+.carouselview{
+    height: auto;
+}
+.carousel-item{
+    /* z-index: 0; */
+}
+.mvoverview{
+    
+}
+.carmvname{
+/* font-size: 50px; */
+font-family: 'Oswald', sans-serif;
+}
+.carmvdesc{
+    background-image: linear-gradient(180deg , #15151500,#151515c7,#151515);
+    padding: 0px 20px 2vw 4.5vw;
+    width: 100%;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    /* z-index: 1; */
+}
+
+.carmvimg{
+    border-radius: 10px;
+    /* height: 400px; */
+    
+}
+.downHome{
+    margin-top: 20px;
+    display: grid;
+    width: 100%;
+    position: relative;
+    z-index: 3;
+    /* background-color: rebeccapurple; */
+
+    
+}
+.HomePage{
+    display: flex;
+    flex-direction: column;
+
+}
+
+.cardimg{
+    width: 180px;
+    object-fit: cover;
+    height: 255px;
+    border-radius: 5px;
+}
+
+
+.card{
+    background-color: #2e2e2e;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin: 10px;
+    justify-content: center;
+    width: 182px;
+}.card , .carousel-item :hover{
+    cursor: pointer;
+}
+
+.popularSeries {
+    display: grid;
+    grid-gap: 10px; /* Adjust as needed */
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Default setting for smaller screens */
+}
+
+/* For medium screens (e.g., tablets) */
+@media (min-width: 600px) {
+    .popularSeries {
+        grid-template-columns: repeat(3, 1fr); /* 3 columns on medium screens */
+    }
+}
+
+/* For large screens (e.g., desktops) */
+@media (min-width: 1024px) {
+    .popularSeries {
+        grid-template-columns: repeat(5, 1fr); /* 5 columns on large screens */
+    }
+}
+
+.title{
+    font-family: 'Oswald', sans-serif;
+    margin-top: 35px;
+    margin-bottom: 10px;
+    font-size: 30px;
+    padding-left: 15px;
+    font-weight: 100;
+}
+
+.carddesc{
+    /* background-color: antiquewhite; */
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+}
+.cardmvname{
+    /* background-color: aliceblue; */
+    display: flex;
+    padding: 6px;
+    margin-bottom: 3px;
+    font-size: 15.5px;
+    height: min-content;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+}
+.cardrating{
+    justify-content: center;
+    margin-top: 6px;
+    font-family: 'Oswald', sans-serif; 
+    width: 100%;
+    display: flex;
+    /* padding-bottom: 8px; */
+    flex-direction: row;
+    font-size: 13.5px;
+}
+.cardstar{
+    /* padding-bottom: 2px; */
+    margin-right: 10px;
+}
+.lkj{
+    padding-top: 2px;
+    padding-right: 5px;
+}

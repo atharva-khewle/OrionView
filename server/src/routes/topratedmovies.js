@@ -8,21 +8,8 @@ import fetch from 'node-fetch';
 const router = express.Router();
 
 
-router.get('/', async (req, res) => {
-  const url = 'http://api.themoviedb.org/3/movie/now_playing?api_key=fb65aa975bbfceef38074d901769c896&language=en-US&page=1';
-  
-  try {
-      const response = await axios.get(url);
-      res.json(response.data);
-  } catch (error) {
-      console.error('Error occurred:', error.response ? error.response.data : error.message);
-      res.status(500).send('Error fetching data');
-  }
-});
-
-
 // router.get('/', async (req, res) => {
-//     const url = 'http://api.themoviedb.org/3/movie/now_playing?api_key=fb65aa975bbfceef38074d901769c896&language=en-US&page=1';
+//     const url = 'http://api.themoviedb.org/3/movie/top_rated?api_key=fb65aa975bbfceef38074d901769c896&language=en-US&page=1';
 //     const options = {
 //       method: 'GET',
 //       headers: {
@@ -39,4 +26,16 @@ router.get('/', async (req, res) => {
 // // res.json(result)
 // })
 
-export{router as popularMoviesRouter};
+router.get('/', async (req, res) => {
+  const url = 'http://api.themoviedb.org/3/movie/top_rated?api_key=fb65aa975bbfceef38074d901769c896&language=en-US&page=1';
+  
+  try {
+      const response = await axios.get(url);
+      res.json(response.data);
+  } catch (error) {
+      console.error('Error occurred:', error.response ? error.response.data : error.message);
+      res.status(500).send('Error fetching data');
+  }
+});
+
+export{router as topRatedMoviesRouter};

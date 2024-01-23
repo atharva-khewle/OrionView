@@ -548,6 +548,10 @@ video {
   visibility: visible;
 }
 
+.z-10 {
+  z-index: 10;
+}
+
 .flex {
   display: flex;
 }
@@ -556,12 +560,42 @@ video {
   display: none;
 }
 
+.w-10 {
+  width: 2.5rem;
+}
+
 .resize {
   resize: both;
 }
 
+.flex-row {
+  flex-direction: row;
+}
+
 .flex-col {
   flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.pt-1 {
+  padding-top: 0.25rem;
+}
+
+.align-middle {
+  vertical-align: middle;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.text-9xl {
+  font-size: 8rem;
+  line-height: 1;
 }
 
 .text-white {

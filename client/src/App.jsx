@@ -9,6 +9,7 @@ import { ProfilePage } from './pages/ProfilePage'
 import { SearchPage } from './pages/SearchPage'
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Mvinfopage } from './pages/mvinfopage'
 // import {  faBars} from "@fortawesome/free-solid-svg-icons";
 // import {} from "@tre"
 
@@ -48,6 +49,7 @@ function App() {
       <Route path="/home" element={ <HomePage/>} />
       <Route path="/search" element={ <SearchPage/>} />
       <Route path="/profile" element={ <ProfilePage/>} />
+      <Route path="/mvinfo" element={ <Mvinfopage/>} />
     </Routes>
       </div>
       </div>
@@ -77,7 +79,7 @@ const NavBar= () => {
   };
 
   return (
-    <div className='navcenterer'>
+    <div className='navcenterer '>
       
     <div className='navbar'>
 
@@ -89,7 +91,7 @@ const NavBar= () => {
         <svg xmlns="http://www.w3.org/2000/svg" height="16" width="14" viewBox="0 0 448 512">
         <path fill="#fbfcfd" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
         </div>
-        <div className={`flex flex-col dropdownfile ${isNavListVisible ? 'visible' : 'hidden'}`} ref={navlist}>
+        <div className={`flex flex-col dropdownfile z-10 ${isNavListVisible ? 'visible' : 'hidden'}`} ref={navlist}>
           <div onClick={() => navigateAndHideNavList('/home')}>Home</div>
           <div className="navvspace"></div>
           <div onClick={() => navigateAndHideNavList('/search')}>Search</div>
