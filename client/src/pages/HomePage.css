@@ -68,6 +68,7 @@ font-family: 'Oswald', sans-serif;
     flex-direction: column;
     height: auto;
     margin: 10px;
+    
     justify-content: center;
     width: 182px;
 }.card , .carousel-item :hover{

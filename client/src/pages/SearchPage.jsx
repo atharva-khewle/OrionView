@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import "./SearchPage.css"
 import { SeriesGrid, useWindowSize } from './HomePage'
 import { useState } from 'react'
@@ -10,30 +10,64 @@ import { Movie, Series } from './MediaClasses'
 export const SearchPage = () => {
   const [width, height] = useWindowSize();
   const [contentType, setContentType] = useState("movie");
+  const [Page, setPage] = useState(1);
   const [searchResults, setSearchResults] = useState([]);
+  const [maxPage,setmaxPage] = useState(1)
   const queryRef = useRef();
+  const [currQ,setcurrQ]=useState("")
   // const [currentPage, setCurrentPage] = useState(1);
+
+
+  useEffect(() => {
+  }, [searchResults]);
+
+
+
+  const handlePageChange = async (newPage) => {
+    const response = await axios.get(`http://localhost:3001/search/?content=${contentType}&query=${currQ}&page=${newPage}`);
+    const data = response.data.results.map(item => 
+      contentType === "movie" 
+        ? new Movie(item.title, item.overview, item.poster_path, item.id, item.vote_average, item.vote_count, item.backdrop_path)
+        : new Series(item.name, item.overview, item.poster_path, item.id, item.vote_average, item.vote_count, item.backdrop_path)
+    );
+    setPage(newPage);
+    setmaxPage(response.data.total_pages);
+    setSearchResults(data);
+  };
 
 
   const handleSearch = async () => {
     console.log("handleSearch called");
-    const query = queryRef.current.value;
+    const query = queryRef.current?.value;
     if (!query) return;
-
+  
     try {
-      const response = await axios.get(`http://localhost:3001/search/?content=${contentType}&query=${query}&page=${currentPage}`);
-      const data = response.data.results.map(item => 
-        contentType === "movie" 
-          ? new Movie(item.title, item.overview, item.poster_path, item.id, item.vote_average, item.vote_count, item.backdrop_path)
-          : new Series(item.name, item.overview, item.poster_path, item.id, item.vote_average, item.vote_count, item.backdrop_path)
-      );
-      setSearchResults(data);
+      if (currQ !== query) {
+        setPage(1);
+        const response = await axios.get(`http://localhost:3001/search/?content=${contentType}&query=${query}&page=1`);
+        const data = response.data.results.map(item => 
+          contentType === "movie" 
+            ? new Movie(item.title, item.overview, item.poster_path, item.id, item.vote_average, item.vote_count, item.backdrop_path)
+            : new Series(item.name, item.overview, item.poster_path, item.id, item.vote_average, item.vote_count, item.backdrop_path)
+        );
+        setcurrQ(query);
+        setmaxPage(response.data.total_pages);
+        setSearchResults(data);
+      } else {
+        const response = await axios.get(`http://localhost:3001/search/?content=${contentType}&query=${query}&page=${Page}`);
+        const data = response.data.results.map(item => 
+          contentType === "movie" 
+            ? new Movie(item.title, item.overview, item.poster_path, item.id, item.vote_average, item.vote_count, item.backdrop_path)
+            : new Series(item.name, item.overview, item.poster_path, item.id, item.vote_average, item.vote_count, item.backdrop_path)
+        );
+        setPage(response.data.page);
+        setmaxPage(response.data.total_pages);
+        setSearchResults(data);
+      }
     } catch (error) {
       console.error(error);
-      // Optionally handle the error in the UI
     }
   };
-
   
   return (
     <div className='searchpage'>
@@ -77,11 +111,121 @@ export const SearchPage = () => {
 
 <div className="searchresults">
 <div className="title" style={{fontSize:`${(width/height)<=0.6?"20px":"35px"}`}}>
-      {(queryRef.current||queryRef.current.value=="")?"":`Results for "${queryRef.current.value}"`}
+      {/* {(queryRef.current?.value)?"":`Results for "${queryRef.current.value}"`} */}
+      {queryRef.current?.value ? `Results for "${queryRef.current.value}"` : ""}
+
       </div>
 
   <SeriesGrid seriesData={searchResults}/>
 </div>
+
+
+{/* <div className="mvpages">
+  <button onClick={() => {
+  if(Page>1){
+  setPage(Page-1)
+  handleSearch()
+  }
+  }} disabled={Page <= 1}>Previous</button>
+  <span>Page {Page} of {maxPage}</span>
+  <button onClick={() => {
+    if(Page<maxPage){
+  setPage(Page+1)
+  handleSearch()
+  }
+  }} disabled={Page >= maxPage}>Next</button>
+</div> */}
+
+<div className="mvpages">
+
+{
+  queryRef.current?.value ===""?
+  <div ></div>
+  :
+  <nav aria-label="Page navigation example" className="dark-mode">
+  <ul className="pagination justify-content-center">
+    {/* Previous Page */}
+    <li className={`page-item ${Page <= 1 ? 'disabled' : ''}`}>
+      <a className="page-link" href="#" onClick={(e) => {
+        e.preventDefault();
+        if (Page > 1) handlePageChange(Page - 1);
+      }}>Previous</a>
+    </li>
+
+    {/* First Page */}
+    {Page > 1 && (
+      <li className="page-item">
+        <a className="page-link" href="#" onClick={(e) => {
+          e.preventDefault();
+          handlePageChange(1);
+        }}>1</a>
+      </li>
+    )}
+
+    {/* Ellipsis before current page */}
+    {Page > 3 && (
+      <li className="page-item disabled">
+        <span className="page-link">...</span>
+      </li>
+    )}
+
+    {/* Page before current page */}
+    {Page > 2 && (
+      <li className="page-item">
+        <a className="page-link" href="#" onClick={(e) => {
+          e.preventDefault();
+          handlePageChange(Page - 1);
+        }}>{Page - 1}</a>
+      </li>
+    )}
+
+    {/* Current Page */}
+    <li className="page-item active">
+      <span className="page-link">{Page}</span>
+    </li>
+
+    {/* Page after current page */}
+    {Page < maxPage - 1 && (
+      <li className="page-item">
+        <a className="page-link" href="#" onClick={(e) => {
+          e.preventDefault();
+          handlePageChange(Page + 1);
+        }}>{Page + 1}</a>
+      </li>
+    )}
+
+    {/* Ellipsis after current page */}
+    {Page < maxPage - 2 && (
+      <li className="page-item disabled">
+        <span className="page-link">...</span>
+      </li>
+    )}
+
+    {/* Last Page */}
+    {Page < maxPage && (
+      <li className="page-item">
+        <a className="page-link" href="#" onClick={(e) => {
+          e.preventDefault();
+          handlePageChange(maxPage);
+        }}>{maxPage}</a>
+      </li>
+    )}
+
+    {/* Next Page */}
+    <li className={`page-item ${Page >= maxPage ? 'disabled' : ''}`}>
+      <a className="page-link" href="#" onClick={(e) => {
+        e.preventDefault();
+        if (Page < maxPage) handlePageChange(Page + 1);
+      }}>Next</a>
+    </li>
+  </ul>
+</nav>
+
+}
+
+</div>
+
+
     </div>
   )
 }

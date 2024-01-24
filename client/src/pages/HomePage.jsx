@@ -227,7 +227,7 @@ export const SeriesGrid = ({ seriesData }) => {
     <div className="popularSeries">
       {seriesData.map((series, index) => {
         const url = `https://image.tmdb.org/t/p/w500${series.poster_path}`;
-        const fallbackUrl = './../../assets/notfound.png'; // Replace with your fallback image URL
+        const fallbackUrl = './../../assets/notfound2.png';
 
         return (
           <div key={index} className='card'>

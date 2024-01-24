@@ -43,9 +43,38 @@ justify-content: center;
 
 .title{
     font-family: 'Oswald', sans-serif;
-    margin-top: 35px;
+    margin-top: 20px;
     margin-bottom: 15px;
     font-size: 30px;
     padding-left: 15px;
     font-weight: 100;
 }
+
+
+
+.dark-mode {
+    background-color: #121212;
+    color: white;
+  }
+  
+  .dark-mode .page-link {
+    background-color: #242424;
+    color: white;
+  }
+  
+  .dark-mode .page-item.active .page-link {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  
+  .dark-mode .page-item.disabled .page-link {
+    color: #6c757d;
+  }
+  
+  .dark-mode .page-link:hover {
+    background-color: #343a40;
+  }
+
+.mvpages{
+    margin-top: 20px;
+}  
