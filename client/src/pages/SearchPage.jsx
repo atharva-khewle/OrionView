@@ -17,6 +17,14 @@ export const SearchPage = () => {
   const [currQ,setcurrQ]=useState("")
   // const [currentPage, setCurrentPage] = useState(1);
 
+  window.onload = () => {
+    if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+      console.log('The page was reloaded.');
+      queryRef.current.value =""
+    } else {
+      console.log('The page was not reloaded.');
+    }
+  };
 
   useEffect(() => {
   }, [searchResults]);
@@ -120,26 +128,12 @@ export const SearchPage = () => {
 </div>
 
 
-{/* <div className="mvpages">
-  <button onClick={() => {
-  if(Page>1){
-  setPage(Page-1)
-  handleSearch()
-  }
-  }} disabled={Page <= 1}>Previous</button>
-  <span>Page {Page} of {maxPage}</span>
-  <button onClick={() => {
-    if(Page<maxPage){
-  setPage(Page+1)
-  handleSearch()
-  }
-  }} disabled={Page >= maxPage}>Next</button>
-</div> */}
+
 
 <div className="mvpages">
 
 {
-  queryRef.current?.value ===""?
+  queryRef.current?.value ==="" ?
   <div ></div>
   :
   <nav aria-label="Page navigation example" className="dark-mode">

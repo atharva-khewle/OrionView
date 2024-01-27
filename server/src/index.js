@@ -18,6 +18,7 @@ import { popularMoviesRouter } from "./routes/popularmovies.js";
 import { popularSeriesRouter } from "./routes/poopularseries.js";
 import { topRatedMoviesRouter } from "./routes/topratedmovies.js";
 import { searchQueryRouter } from "./routes/searchqurey.js";
+import { getdatabyID } from "./routes/getdatabyTVDBid.js";
 
 const app = express()
 
@@ -32,7 +33,9 @@ app.use("/auth",UserRouter);
 app.use("/popularmovies",popularMoviesRouter)
 app.use("/topratedmovies",topRatedMoviesRouter)
 app.use("/popularseries",popularSeriesRouter)
+app.use("/getdatabyid",getdatabyID)
 app.use("/search",searchQueryRouter)
+
 
 app.use("/xkcd",xkcdRouter);
 

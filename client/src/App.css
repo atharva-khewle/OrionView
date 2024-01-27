@@ -78,6 +78,7 @@
 .pageview{
     width: 1090px;
     display: flex;
+    height: 100vh;
     padding: 20px;
 }
 
