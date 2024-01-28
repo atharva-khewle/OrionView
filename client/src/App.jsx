@@ -40,6 +40,7 @@ function App() {
     <div>
   <Router>
         <NavBar/>
+
       <div className='centerpageview'>
       <div className="pageview">
       <Routes>
@@ -53,6 +54,8 @@ function App() {
     </Routes>
       </div>
       </div>
+      <Footer/>
+
 
   </Router>
   </div>
@@ -60,6 +63,31 @@ function App() {
   </div>
   )
 }
+
+
+const Footer = () => {
+  return (
+    <div className="footerp">
+      <div className="footer-icons">
+        <a href="https://github.com/atharva-khewle" className="footer-icon" target="_blank">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/github.png" alt="GitHub" />
+        </a>
+        <a href="https://www.linkedin.com/in/atharvakhewle" className="footer-icon" target="_blank">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/linkedin.png" alt="LinkedIn" />
+        </a>
+        <a href="https://www.instagram.com/atharva_work/" className="footer-icon" target="_blank">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/instagram-new.png" alt="Instagram" />
+        </a>
+        <a href="https://twitter.com/atharvamainwork" className="footer-icon" target="_blank">
+          <img src="https://img.icons8.com/ios-filled/50/ffffff/twitter.png" alt="Twitter" />
+        </a>
+      </div>
+      <p className='footernote '>© 2024 Developed with MERN stack by <strong>Atharva Khewle </strong>.</p>
+    </div>
+  );
+};
+
+
 
 
 const NavBar= () => {
@@ -83,7 +111,13 @@ const NavBar= () => {
       
     <div className='navbar'>
 
-      <div className="navlogo">OrionView</div>
+      <div className="navlogo">
+      <div class="box">
+  <div class="text">OrionView</div>
+  {/* in premium remove this  */}
+  {/* <b></b> */}
+</div>
+      </div>
       {
         (width/height)<=0.6?
         <>

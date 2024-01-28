@@ -133,7 +133,7 @@ export const SearchPage = () => {
 <div className="mvpages">
 
 {
-  queryRef.current?.value ==="" ?
+  searchResults ?
   <div ></div>
   :
   <nav aria-label="Page navigation example" className="dark-mode">

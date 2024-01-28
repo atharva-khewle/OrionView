@@ -6,6 +6,7 @@
 }
 .searchpage{
     width: 100%;
+    /* height: 50vh; */
 }
 
 .searchtext{
@@ -53,7 +54,6 @@ justify-content: center;
 
 
 .dark-mode {
-    background-color: #121212;
     color: white;
   }
   
@@ -78,3 +78,9 @@ justify-content: center;
 .mvpages{
     margin-top: 20px;
 }  
+
+
+
+
+
+
