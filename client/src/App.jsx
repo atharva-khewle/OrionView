@@ -44,7 +44,7 @@ function App() {
       <div className='centerpageview'>
       <div className="pageview">
       <Routes>
-      <Route path="/" element={ <StartPage/>} />
+      <Route path="/" element={ <HomePage/>} />
       <Route path="/register" element={ <RegisterPage/>} />
       <Route path="/login" element={ <LoginPage/>} />
       <Route path="/home" element={ <HomePage/>} />
@@ -111,7 +111,7 @@ const NavBar= () => {
       
     <div className='navbar'>
 
-      <div className="navlogo">
+      <div className="navlogo" onClick={() => navigate('/home')}>
       <div class="box">
   <div class="text">OrionView</div>
   {/* in premium remove this  */}

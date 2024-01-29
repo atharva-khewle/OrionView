@@ -34,14 +34,16 @@ const newUserquery = new UserModel({
 //saved in db
 await newUserquery.save();
 
+//gtting object savved in db
 const userinfo = await UserModel.findOne({username});
 
+////////////////////// userinfo._id gives us id with what the object si saved
 const token = jwt.sign({id : userinfo._id} , secretTkn())
 
 
 //should only  give 1 response
 res.json({
-    message:"registerd successfully :)",
+    message:"Registerd successfully :)",
     token, 
     userID: userinfo._id
 })
@@ -66,7 +68,11 @@ router.post("/login",async(req,res)=>{
 
         const token = jwt.sign({id : userinfo._id} , secretTkn())
 
-        res.json({token, userID: userinfo._id})
+        res.json({
+            message:"Logged In successfully :)",
+            token,
+             userID: userinfo._id
+            })
 
 
         

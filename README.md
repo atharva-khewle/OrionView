@@ -8,3 +8,5 @@ Welcome to the official GitHub repository for OrionView, a cutting-edge movie st
 - **Enhanced Security:** All user passwords are securely encrypted, ensuring data protection and privacy.
 - **In Development:** The site is currently under active development. We're working hard to bring you a seamless and engaging movie-watching experience.
 
+
+token and hashed passwords used for security

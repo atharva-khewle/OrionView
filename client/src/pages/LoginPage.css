@@ -1,0 +1,28 @@
+button {
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: white;
+}
+.loginlayout{
+    width: 100%;
+    height: 500px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    padding-bottom: 50px;
+    /* background-color: cadetblue; */
+}
+.formlayout{
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(78, 78, 78, 0.925);
+}
+.logintext{
+    margin-bottom: 10px;
+}
+.btn{
+    margin-top: 15px;
+}

@@ -4,7 +4,8 @@
 
 .navbar{
     height: 60px;
-    background-color: #0e0e0e;
+    z-index: 10;
+    /* background-color: #0e0e0e; */
     /* background-color: #11111180; */
     padding: 0px;
     display: flex;
@@ -33,11 +34,11 @@
     font-size: 30px;
 }
 @keyframes myanimation {
-    0% { color: #ff4747; } /* Bright Red */
-    25% { color: #47ff8f; } /* Bright Green */
-    50% { color: #4747ff; } /* Bright Blue */
-    75% { color: #ff47d1; } /* Bright Pink */
-    100% { color: #ffff47; } /* Bright Yellow */
+  0% { color: linear-gradient(to right, #FF758C, #FF7EB3); }
+  25% { color: linear-gradient(to right, #6EE2F5, #6454F0); }
+  50% { color: linear-gradient(to right, #FFF6B7, #F6416C); }
+  75% { color: linear-gradient(to right, #81FBB8, #28C76F); }
+  100% { color: linear-gradient(to right, #FF758C, #FF7EB3); }
   }
 .navbaritems{
     display: flex;
@@ -76,9 +77,9 @@
   }
 .navcenterer{
     background-color: #0e0e0e;
-
+    z-index: 10;
     display: flex;
-    /* width: 100vh; */
+    width: 100vw;
     justify-content: center;
     border-bottom: 1px solid rgba(31, 31, 31, 0.925);
     align-items: center;
@@ -115,7 +116,7 @@ body{
 
 
 
-  .navhome, .navsearch, .navprofile, .dropdownfile div {
+  .navhome, .navsearch, .navprofile, .dropdownfile div ,.navlogo{
     cursor: pointer;
   }
   
@@ -196,7 +197,7 @@ body{
     position: relative;
     /* box-shadow: inset 0 0 3px #000; */
     border-radius: 5px;
-    border: 1px solid #111;
+    /* border: 1px solid #111; */
     overflow: hidden;
   }
   
