@@ -70,6 +70,10 @@ export const LoginPage = () => {
         username: loginDetails.username,
         password: loginDetails.password
       });
+      if(!response.data.token) {
+        setError('Login failed');
+        return
+      }
       // Save token and userId in cookies
       setCookie('token', response.data.token, { path: '/', maxAge: 3600 * 24 * 7 }); // Expires in 7 days
       setCookie('userId', response.data.userId, { path: '/', maxAge: 3600 * 24 * 7 });

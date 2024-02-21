@@ -34,12 +34,12 @@ function useWindowSize() {
 
 function App() {
   const [width, height] = useWindowSize();
-
+  
   return (
   <div className='canvas'>
     <div>
   <Router>
-        <NavBar/>
+        <NavBar />
 
       <div className='centerpageview'>
       <div className="pageview">
@@ -107,7 +107,7 @@ const NavBar= () => {
   };
 
   return (
-    <div className='navcenterer '>
+    <div className='navcenterer ' >
       
     <div className='navbar'>
 

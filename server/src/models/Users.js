@@ -3,13 +3,15 @@ import mongoose from "mongoose";
 
 // ListItem Schema (for User's list)
 const listItemSchema = new mongoose.Schema({
+    //save imdb id in title
     title: { type: String, required: true },
     type: { type: String, required: true, enum: ['movie', 'series'] },
-    status: { type: String, required: true, enum: ['watched', 'not watched', 'watching'] },
+    status: { type: String, required: true, enum: ['watching', 'completed', 'dropped','wishlist'] },
     episodesWatched: { 
         type: Number, 
         required: function() { return this.type === 'series'; }
-    }
+    },
+    isFavorite: { type: Boolean, default: false } 
 });
 
 // User Schema
@@ -18,16 +20,6 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
     list: [listItemSchema],
     image: { type: String, required: false },
-    watchHistory: [{
-        title: { type: String, required: true }, // Storing just the movie title
-        watchedOn: { type: Date, default: Date.now }
-    }],
-    watchlist: [{
-        title: { type: String, required: true } // Storing just the movie title
-    }],
-    favorites: [{
-        title: { type: String, required: true } // Storing just the movie title
-    }]
 });
 
 // Create the model from the schema and export it

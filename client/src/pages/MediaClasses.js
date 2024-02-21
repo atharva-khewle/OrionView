@@ -22,3 +22,17 @@ export  class Series {
       this.backdrop_path = backdrop_path;
     }
   }
+
+export class MyListItem {
+    constructor(id, name, isMovie, status, season, episodes, watchedEpisodes, duration, imgPathFile) {
+      this.id = id;
+      this.name = name;
+      this.isMovie = isMovie;
+      this.status = status;
+      this.season = season;
+      this.episodes = episodes;
+      this.watchedEpisodes = watchedEpisodes;
+      this.duration = duration;
+      this.imgPathFile = imgPathFile;
+    }
+}

@@ -54,27 +54,30 @@ res.json({
 router.post("/login",async(req,res)=>{
         const {username,password}=req.body;
 
-        const userinfo = await UserModel.findOne({username});
+        try{
+            const userinfo = await UserModel.findOne({username});
     
-        if(!userinfo){
-            return res.json({message: "user does not exist :("});
+            if(!userinfo){
+                return res.json({message: "user does not exist :("});
+            }
+    
+            const ispassvalid = await bcrypt.compare(password,userinfo.password);
+    
+            if(!ispassvalid){
+                return res.json({message:"Incorrect Password or username :( "})
+            }
+    
+            const token = jwt.sign({id : userinfo._id} , secretTkn())
+    
+            res.json({
+                message:"Logged In successfully :)",
+                token,
+                 userID: userinfo._id
+                })
+                
+        }catch(e){
+            res.status(500).send('Error fetching data');
         }
-
-        const ispassvalid = await bcrypt.compare(password,userinfo.password);
-
-        if(!ispassvalid){
-            return res.json({message:"Incorrect Password or username :( "})
-        }
-
-        const token = jwt.sign({id : userinfo._id} , secretTkn())
-
-        res.json({
-            message:"Logged In successfully :)",
-            token,
-             userID: userinfo._id
-            })
-
-
         
 })
  

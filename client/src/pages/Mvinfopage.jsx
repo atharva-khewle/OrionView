@@ -129,7 +129,7 @@ const MovieInfoGrid = ({ movieData, content }) => {
         <>
           <div className="grid-item"><strong>Released:</strong> {movieData.first_air_date || "N/A"}</div>
           <div className="grid-item"><strong>Genre:</strong> {movieData.genres ? movieData.genres.map(genre => genre.name).join(", ") : "N/A"}</div>
-          <div className="grid-item"><strong>Duration:</strong> {movieData.episode_run_time ? movieData.episode_run_time.join(", ") : "N/A"} min</div>
+          <div className="grid-item"><strong>Episode duration:</strong> {movieData.episode_run_time ? movieData.episode_run_time.join(", ") : "N/A"} min</div>
           <div className="grid-item"><strong>Network:</strong> {movieData.networks ? movieData.networks.map(network => network.name).join(", ") : "N/A"}</div>
           <div className="grid-item"><strong>Rating:</strong> {movieData.vote_average ? formatRating(movieData.vote_average) : "N/A"} ({movieData.vote_count ? formatVotes(movieData.vote_count) : "0"} votes)</div>
           <div className="grid-item"><strong>Country:</strong> {movieData.origin_country ? movieData.origin_country.join(", ") : "N/A"}</div>

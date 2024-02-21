@@ -21,10 +21,13 @@ export function useWindowSize() {
 
 const scrollToTop = () => {
   window.scrollTo({
-    top: -100,
+    top: 0,
     behavior: 'smooth'
   });
+  
 };
+
+
 
 
 export const HomePage = () => {
@@ -89,12 +92,11 @@ export const HomePage = () => {
   const handleNavigate = (seriesId, isMovieParam) => {
     navigate(`/mvinfo`, { state: { isMovie: isMovieParam, id: seriesId } });
     scrollToTop();
+
   };
 
-
-
   return (
-    <div className='HomePage'>
+    <div className='HomePage' >
 
       <div className="carouselview">
       <div id="carouselExampleRide" class="carousel slide" data-bs-ride="true">
@@ -147,7 +149,11 @@ export const HomePage = () => {
     <div className="popularSeries">
     {series.map((series, index) => (
     
-    <div key={index} className='card' onClick={() => handleNavigate(series.id, isthisMovie(series))}>
+    <div key={index} className='card cscale' 
+    onClick={() => {
+      handleNavigate(series.id, isthisMovie(series))
+      scrollToTop()
+    }}>
       <div className="cardimgdiv">
         <img src={`https://image.tmdb.org/t/p/w500${series.poster_path}`} className='cardimg' alt="" />
       </div>
@@ -182,7 +188,8 @@ export const HomePage = () => {
     <div className="popularSeries">
     {topRatedMovies.map((series, index) => (
     
-    <div key={index} className='card' onClick={() => handleNavigate(series.id, isthisMovie(series))}>
+<div className='cscale'>
+<div key={index} className='card ' onClick={() => handleNavigate(series.id, isthisMovie(series))}>
       <div className="cardimgdiv">
         <img src={`https://image.tmdb.org/t/p/w500${series.poster_path}`} className='cardimg' alt="" />
       </div>
@@ -203,6 +210,7 @@ export const HomePage = () => {
 
       </div>
     </div>
+</div>
   ))}
     </div>
 
@@ -232,7 +240,7 @@ export const SeriesGrid = ({ seriesData }) => {
         const fallbackUrl = './../../assets/notfound2.png';
 
         return (
-          <div key={index} className='card' onClick={() => handleNavigate(series.id, isthisMovie(series))}>
+          <div key={index} className='card cscale' onClick={() => handleNavigate(series.id, isthisMovie(series))}>
             <div className="cardimgdiv">
               <img 
                 src={url} 
@@ -286,7 +294,7 @@ export const SeriesRecGrid = ({ seriesData }) => {
         const fallbackUrl = './../../assets/notfound2.png';
 
         return (
-          <div key={index} className='card' onClick={() => handleNavigate(series.id,series.title?"Movie":"TV")}>
+          <div key={index} className='card cscale' onClick={() => handleNavigate(series.id,series.title?"Movie":"TV")}>
             <div className="cardimgdiv">
               <img 
                 src={url} 
