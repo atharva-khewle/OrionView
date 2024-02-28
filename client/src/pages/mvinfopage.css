@@ -31,6 +31,7 @@ width: 100%;
     border-radius: 8px;
     border: 2px solid #151515;
 
+
 }
 
 
@@ -50,16 +51,56 @@ width: 100%;
     /* background-color: white; */
     text-align: center;
     align-items: center;
+    justify-content: start;
     width: 69%;
+    display: flex;
+    flex-direction: column;
 }
 
+.heart{
+    padding-bottom: 5px;
+}
+.userselect{
+    /* background-color: aliceblue; */
+    display: flex;
+    padding: 6px;
+    margin-bottom: 3px;
+    /* position: absolute; */
+    bottom: -5vw;
+    /* left: 300px; */
+    /* font-size: 15.5px; */
+    height: min-content;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    /* justify-content: center; */
+    /* background-color: white; */
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: start;
 
+    
+}
+
+.mvname2{
+    width: 100%;
+    display: flex;
+}
+.userselectoptions{
+    background-color: #151515;
+    border: 0px solid white;
+    color: white;
+    margin-left: 45px;
+    margin-right: 87px;
+}
 .carmvdesc2{
     background-image: linear-gradient(180deg , #15151500,#151515c7,#151515);
     height: 80px;
     padding: 0px 20px 2vw 4.5vw;
     width: 100%;
     position: absolute;
+    display: flex;
+    flex-direction: column;
     bottom: 0px;
     left: 0px;
 }

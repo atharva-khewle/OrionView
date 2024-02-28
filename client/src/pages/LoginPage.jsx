@@ -19,13 +19,13 @@ export const LoginPage = () => {
 
 
   useEffect(() => {
-    if (cookies.token && cookies.userId) {
-      console.log('Token and UserId are available in cookies');
+    if (cookies.token) {
+      console.log('Token vailable in cookies');
       // Perform actions based on the existence of token and userId
       navigate("/profile")
 
     } else {
-      console.log('Token or UserId not found in cookies');
+      console.log('Token not found in cookies');
       // Handle the absence of token and userId
     }
   }, [cookies.token, cookies.userId]);
@@ -76,7 +76,7 @@ export const LoginPage = () => {
       }
       // Save token and userId in cookies
       setCookie('token', response.data.token, { path: '/', maxAge: 3600 * 24 * 7 }); // Expires in 7 days
-      setCookie('userId', response.data.userId, { path: '/', maxAge: 3600 * 24 * 7 });
+      // setCookie('userID', response.data.userID, { path: '/', maxAge: 3600 * 24 * 7 });
       console.log('Login response:', response.data);
     } catch (error) {
       setError('Login failed');
@@ -111,7 +111,7 @@ export const LoginPage = () => {
       });
       // Save token and userId in cookies after registration
       setCookie('token', response.data.token, { path: '/', maxAge: 3600 * 24 * 7 }); // Expires in 7 days
-      setCookie('userId', response.data.userId, { path: '/', maxAge: 3600 * 24 * 7 });
+      // setCookie('userId', response.data.userID, { path: '/', maxAge: 3600 * 24 * 7 });
       console.log('Register response:', response.data);
     } catch (error) {
       setError('Registration failed');

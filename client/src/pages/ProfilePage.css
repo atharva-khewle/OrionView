@@ -32,7 +32,6 @@ flex-direction: column;
 }
 
 .blurimg{
-
     position: absolute;
     top: -20vh;
 width: 100vw;
@@ -42,7 +41,6 @@ transform: scale(1);
 background-image: url("https://picsum.photos/400/400");
 filter: blur(1000px);
 opacity: 0.7;
-
 }
 .name{
     font-size: 20px;
@@ -51,7 +49,7 @@ opacity: 0.7;
 .mylistdiv{
     margin-top: 40px;
     width: 100%;
-    min-height: 400px;
+    min-height: 200px;
     /* background-color: #12121294; */
     background-color: #1D1D1C;
     border-top-left-radius: 10px;
@@ -111,6 +109,7 @@ opacity: 0.7;
     /* border-bottom: 0.2px solid rgb(68, 68, 68); */
     display: flex;
     align-items: center;
+    flex-direction: row;
     padding-left: 10px;
     border-radius: 4px;
     margin: 5px;
@@ -118,6 +117,7 @@ opacity: 0.7;
     /* border-bottom-left-radius: 9px; */
   }
   .myitemimg{
+    margin-right: 12px;
     border-radius: 5px;
     height: 65px;
     width: 50px;
@@ -131,4 +131,54 @@ opacity: 0.7;
   .myitem:hover {
     cursor: pointer;
     background-color: rgba(255, 255, 255, 0.089);
+  }
+  .mvinfos{
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .mvinfosName{
+    justify-content: space-between;
+    width: 100%;
+    height: auto;
+    font-size: 18px;
+  }
+  .mvinfosContent{
+    width: 100%;
+    height: auto;
+    justify-content: space-between;
+    display: flex;
+    color: gray;
+    flex-direction: row;
+  }
+  .strongtxt{
+    font-size: 16px;
+    color: gray;
+  }
+  .mvtime{
+    padding-right: 6px;
+    padding-left: 6px;
+  }
+  .poiu{
+    display: flex;
+    flex-direction: row;
+    
+  }
+  .oneside{
+    display: flex;
+    flex-direction: row;
+
+  }
+  .two{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+  }
+  .heart{
+    margin-left: 9px;
+    margin-right: 9px;
   }

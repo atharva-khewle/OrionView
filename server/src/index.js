@@ -4,7 +4,14 @@ go to mongodb atlas and whitelist ip address
 start server and client
  */
 
-
+///////////////////// //////
+/*
+bhaiiiiiiiiiiiii
+wasted 1hr
+headers can only go in post not in get
+next time just send tokens inside body
+its less secure but i am aslo not doing some big project
+*/
 import * as Authinfo from "./auth_info.js";
 import express from "express";
 //connect frontend anddbacknd
@@ -20,6 +27,10 @@ import { topRatedMoviesRouter } from "./routes/topratedmovies.js";
 import { searchQueryRouter } from "./routes/searchqurey.js";
 import { getdatabyID } from "./routes/getdatabyTVDBid.js";
 import { getSimilarsByID } from "./routes/getSimilarsbyID.js";
+import { UserDataUpdateRouter } from "./routes/updateUserData.js";
+import { TMBDtoIMDBRouter } from "./routes/getImdbIDbyTMDBID.js";
+import { SavedMovieDataofIserIDRouter } from "./routes/getSavedMovieDataofUserbyID.js";
+import { getUsershowsListRouter } from "./routes/getUserShowsList.js";
 
 const app = express()
 
@@ -36,7 +47,12 @@ app.use("/topratedmovies",topRatedMoviesRouter)
 app.use("/popularseries",popularSeriesRouter)
 app.use("/getdatabyid",getdatabyID)
 app.use("/getsimilarsbyid",getSimilarsByID)
+app.use("/updateList",UserDataUpdateRouter)
+app.use("/getimdbidbytmdbid",TMBDtoIMDBRouter)
 app.use("/search",searchQueryRouter)
+app.use("/getImdbIdbyTmdbId",TMBDtoIMDBRouter)
+app.use("/getsavedmovieidbyuserid",SavedMovieDataofIserIDRouter)
+app.use("/getUserShowsList",getUsershowsListRouter)
 
 
 app.use("/xkcd",xkcdRouter);

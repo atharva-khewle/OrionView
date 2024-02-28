@@ -26,3 +26,25 @@ button {
 .btn{
     margin-top: 15px;
 }
+.pfplayout{
+    position: relative;
+    display: flex;
+}
+.logout{
+    display: flex;
+    background-color: black;
+    height: 42px;
+    border-radius: 100%;
+    z-index: 4;
+    width: 42px;
+    right: 0px;
+    top: 0px;
+    position: absolute;
+    padding: 12px;
+}
+.pfp{
+    /* position: absolute; */
+}
+.logout:hover{
+    background-color: rgb(80, 80, 80);
+}

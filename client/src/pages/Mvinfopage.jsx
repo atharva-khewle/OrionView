@@ -3,6 +3,7 @@ import "./../pages/mvinfopage.css"
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { SeriesGrid, SeriesRecGrid, useWindowSize } from './HomePage';
+import Cookies from 'js-cookie';
 
 const scrollToTop = () => {
   window.scrollTo({
@@ -10,13 +11,48 @@ const scrollToTop = () => {
     behavior: 'smooth'
   });
 };
+function generateRandomSoftColor() {
+  const hue = Math.floor(Math.random() * 360);
+  const saturation = Math.floor(Math.random() * 30) + 70; // Adjust saturation to make colors softer
+  const lightness = Math.floor(Math.random() * 20) + 40; // Adjust lightness to make colors softer and suitable for dark backgrounds
+  return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
+}
 
+const fetchMovieData = async (movieId, token) => {
+  try {
+    console.log("id : ", movieId)
+    console.log("token : ", token)
+
+  const response = await axios.post('http://localhost:3001/getsavedmovieidbyuserid', {
+    movieId: movieId
+  }, {
+    headers: {
+      Authorization: `${token}` // Sending token in Authorization header
+    }
+  });
+
+
+
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching movie data:', error);
+    throw error;
+  }
+};
 
 export const Mvinfopage = () => {
   const location = useLocation();
   const [width, height] = useWindowSize();
   const [data, setData] = useState(null);
+  // const [ImdbId, setImdbId] = useState("");
   const [similarData, setSimilarData] = useState(null);
+  const [isliked,setisliked] = useState(false);
+  const [status, setStatus] = useState('none');
+  const [color, setColor] = React.useState(generateRandomSoftColor());
+  const [token, setToken] = useState('');
+
+
 
 
   // Check if location.state exists before destructuring
@@ -28,8 +64,15 @@ export const Mvinfopage = () => {
     try {
       const response2 = await axios.get(`http://localhost:3001/getdatabyid?id=${id}&ismovie=${content}`);
       setData(response2.data);
+
       const response = await axios.get(`http://localhost:3001/getsimilarsbyid?id=${id}&ismovie=${content}`);
       setSimilarData(response.data.results);
+
+      // const response3 = await axios.get(`http://localhost:3001/getImdbIdbyTmdbId?id=${id}&movie=${content}`);
+      // const imdbIdd = response3.data.imdbId; // Assuming the response has a field named 'imdbId'
+      // setImdbId(imdbIdd);
+      // console.log(imdbIdd)
+  
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -37,11 +80,96 @@ export const Mvinfopage = () => {
 
 
   useEffect(() => {
+   setToken(Cookies.get('token'));
+
     if (id && isMovie !== undefined ) {
-  
       fetchData();
+
+
+
+      
+fetchMovieData(id, Cookies.get('token'))
+.then(data => {
+  console.log('Movie data:', data.data.isFavorite);
+  if(data.success===false){
+    setisliked(false);
+    setStatus('None');
+  }else{
+    setisliked(data.data.isFavorite);
+    setStatus(data.data.status);
+  }
+})
+.catch(error => {
+  console.error('Error UwU:', error);
+});
+
     }
+
   }, [id, isMovie, content]);
+
+
+
+  const handleStatusChange = async (event) => {
+    const newStatus = event.target.value;
+    setStatus(newStatus);
+
+    try {
+      const response = await axios.post('http://localhost:3001/updateList', {
+        movieData: {
+          title: id,
+          type: content === 'true' ? 'movie' : 'series',
+          status: newStatus,
+          episodesWatched: data.episode_watch_count || 0, // Assuming you have 'episode_watch_count' in your data
+          isFavorite: isliked
+        }
+      }, {
+        headers: {
+          Authorization: `${token}` // Sending token in Authorization header
+        }
+      });
+      console.log(response.data); // Log the response from the backend
+    } catch (error) {
+      console.error('Error updating list:', error);
+    }
+  };
+  
+
+  const handleLikeToggle = async () => {
+
+    setisliked(!isliked);
+    //isnt updated so directly updated value
+    console.log(!isliked)
+
+    try {
+      const response = await axios.post('http://localhost:3001/updateList', {
+        movieData: {
+          title: id,
+          type: content === 'true' ? 'movie' : 'series',
+          status,
+          episodesWatched: data.episode_watch_count || 0, // Assuming you have 'episode_watch_count' in your data
+          isFavorite: !isliked // Toggle the value
+        }
+      }, {
+        headers: {
+          Authorization: `${token}` // Sending token in Authorization header
+        }
+      });
+      console.log(response.data); // Log the response from the backend
+    } catch (error) {
+      console.error('Error updating list:', error);
+    }
+  };
+
+
+
+
+
+  // const handleStatusChange = (event) => {
+  //   setStatus(event.target.value);
+  //   //there is delay so i am not using status
+  //   console.log('Selected option:', event.target.value);
+  //   // Add additional logic if needed, like submitting the value
+  // };
 
   if (!data) {
     return <div>Loading...</div>;
@@ -67,12 +195,59 @@ export const Mvinfopage = () => {
             width:`${(width/height)<=1?"100%":"69%"}`,
         }
           }>
+
+
+
+        <div className='mvname2'>
         {content==="true"?data.title:data.name}
-      </div>
+
         </div>
+      </div>
+
+        </div>
+
 
       </div>
       <div className="info">
+      <div className='userselect'style={
+          {
+            // fontSize:`${(width/height)<=1?"40px":"50px"}`,
+            left:`${(width/height)<=1?"10px":"300px"}`,
+            justifyContent:`${(width/height)>1?"start":"space-between"}`,
+        }
+          }>
+
+          <select name="status" id="status" value={status} onChange={handleStatusChange} className='userselectoptions' style={
+            {
+            marginLeft:`${(width/height)>1?"49px":"0px"}`,
+            }
+          }>
+              <option value="none">None</option>
+              <option value="watching">Watching</option>
+              <option value="completed">Completed</option>
+              <option value="wishlist">Wishlist</option>
+              <option value="remove">Remove</option>
+              {/* Add more options here as needed */}
+            </select>
+
+            <div className="heart"  onClick={handleLikeToggle}>
+              {
+                isliked===false?
+                <div >
+            <svg xmlns="http://www.w3.org/2000/svg" height="22" width="22" viewBox="0 0 512 512">
+            {/* <path fill="#FFD43B" d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"/></svg> */}
+            <path fill={`${color}`} d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8v-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5v3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20c0 0-.1-.1-.1-.1c0 0 0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5v3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2v-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"/></svg>
+                </div>
+              :
+              <div>
+            <svg xmlns="http://www.w3.org/2000/svg" height="22" width="22" viewBox="0 0 512 512">
+            <path fill={`${color}`} d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"/></svg>
+              </div>
+              }
+            
+
+            </div>
+        </div>
         {data.overview}
         <MovieInfoGrid movieData={data} content={content} className="mvinfogrid"/>
       </div>

@@ -6,7 +6,7 @@ const listItemSchema = new mongoose.Schema({
     //save imdb id in title
     title: { type: String, required: true },
     type: { type: String, required: true, enum: ['movie', 'series'] },
-    status: { type: String, required: true, enum: ['watching', 'completed', 'dropped','wishlist'] },
+    status: { type: String, required: true, enum: ['watching', 'completed','wishlist','none'] },
     episodesWatched: { 
         type: Number, 
         required: function() { return this.type === 'series'; }

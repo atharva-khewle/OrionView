@@ -24,7 +24,6 @@ const scrollToTop = () => {
     top: 0,
     behavior: 'smooth'
   });
-  
 };
 
 
@@ -90,9 +89,8 @@ export const HomePage = () => {
   const navigate = useNavigate();
 
   const handleNavigate = (seriesId, isMovieParam) => {
-    navigate(`/mvinfo`, { state: { isMovie: isMovieParam, id: seriesId } });
     scrollToTop();
-
+    navigate(`/mvinfo`, { state: { isMovie: isMovieParam, id: seriesId } });
   };
 
   return (

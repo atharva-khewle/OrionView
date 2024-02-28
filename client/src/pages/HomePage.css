@@ -83,8 +83,8 @@ font-family: 'Oswald', sans-serif;
 
 }
 .cardimgdiv :hover{
-    transform: scale(1.04);
-    transition: transform 0.2s ;
+    transform: scale(0.95);
+    transition: transform 0.15s ;
 
 }
 

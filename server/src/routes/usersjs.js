@@ -44,8 +44,8 @@ const token = jwt.sign({id : userinfo._id} , secretTkn())
 //should only  give 1 response
 res.json({
     message:"Registerd successfully :)",
-    token, 
-    userID: userinfo._id
+    token,
+    // userID: userinfo._id
 })
 
 
@@ -62,7 +62,7 @@ router.post("/login",async(req,res)=>{
             }
     
             const ispassvalid = await bcrypt.compare(password,userinfo.password);
-    
+            
             if(!ispassvalid){
                 return res.json({message:"Incorrect Password or username :( "})
             }
@@ -72,7 +72,7 @@ router.post("/login",async(req,res)=>{
             res.json({
                 message:"Logged In successfully :)",
                 token,
-                 userID: userinfo._id
+                //  userID: userinfo._id
                 })
                 
         }catch(e){
