@@ -182,3 +182,26 @@ opacity: 0.7;
     margin-left: 9px;
     margin-right: 9px;
   }
+  .uploadimgdiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* min-width: 300px; */
+    /* width: 50%; */
+    display: none;
+    height: 130px;
+    border-radius: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    align-items: center;
+    background-color: #151515;
+    margin-bottom: 20px;
+    z-index: 0;
+    flex-direction: column;
+  }
+  .imgbutton{
+    margin-right: 15px;
+  }
+  .pfplinkbox:hover{
+    cursor: pointer;
+  }

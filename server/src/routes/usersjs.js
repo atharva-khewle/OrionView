@@ -28,7 +28,8 @@ const hashedpass = await bcrypt.hash(password,10);
 
 const newUserquery = new UserModel({
     username,
-    password: hashedpass
+    password: hashedpass,
+    image:"0"
 })
 
 //saved in db

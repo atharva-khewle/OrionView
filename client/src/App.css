@@ -154,7 +154,7 @@ body{
 
    .footerp {
     border-top: 1px solid rgba(31, 31, 31, 0.925);
-    min-height: 180px;
+    min-height: 250px;
     padding-bottom: 30px;
     display: flex;
     flex-direction: column;
@@ -252,4 +252,29 @@ body{
   .box b, .box .text {
     /* background-image: linear-gradient(to right, #61ab20, #3673cf); */
   }
+  .text{
+    /* -webkit-background-clip: text; */
+    /* -webkit-text-fill-color: transparent; */
+    background-size: cover; /* Adjust background image size */
+    background-repeat: no-repeat; /* Prevent the background image from repeating */
+    background-position: center; /* Center the background image */
+    /* animation: shake 0.5s infinite alternate; Apply the shake animation */
   
+    /* background-image: url('./assets/textbg.jpg'); */
+  }
+.navpfp{
+  height: 30px;
+  width: 30px;
+  border: 1px solid #121212;
+  border-radius: 100%;
+  object-fit: cover;
+}
+.randomdiv1{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.dist{
+  margin-right: 9px;
+}

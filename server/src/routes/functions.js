@@ -5,10 +5,10 @@ import axios from "axios";
 
 
 export const verifyToken = (req, res, next) => {
-    console.log("verifytokenentered  ")
-    // console.log("h ",req)
+    // console.log("verifytokenentered  ")
+    // console.log("h ",req.headers)
     const token = req.headers.authorization;
-    console.log("token ",token)
+    // console.log("token is ",token)
   
     if (!token) {
       return res.status(401).json({ message: "Access denied. No token provided." });
@@ -73,6 +73,29 @@ export  const addOrUpdateMovieToListByUserId = async (userId, movieData) => {
     }
   };
 
+export const updateUserImage = async (userId, imgBit) => {
+  try {
+    // Find the user by their userId (_id)
+    const user = await UserModel.findById(userId);
+
+    if (!user) {
+      return { success: false, message: "User not found." };
+    }
+
+    // Update the user's image with the new imgBit
+    user.image = imgBit;
+
+    // Save the changes to the user document
+    await user.save();
+
+    console.log('updated image')
+
+    return { success: true, message: "User image updated successfully." };
+  } catch (error) {
+    console.error("Error updating user image:", error);
+    throw error; // Throw the error for handling elsewhere
+  }
+};
 
   
 export  async function getIMDbIdFromTMDBId(id, isMovie) {

@@ -79,7 +79,8 @@ export const LoginPage = () => {
       // setCookie('userID', response.data.userID, { path: '/', maxAge: 3600 * 24 * 7 });
       console.log('Login response:', response.data);
     } catch (error) {
-      setError('Login failed');
+      // setError('Login failed');
+      alert("Error Occured. Please try again")
       console.error('Error during login:', error);
     }
   };
@@ -114,7 +115,8 @@ export const LoginPage = () => {
       // setCookie('userId', response.data.userID, { path: '/', maxAge: 3600 * 24 * 7 });
       console.log('Register response:', response.data);
     } catch (error) {
-      setError('Registration failed');
+      // setError('Registration failed');
+      alert("Error Occured. Please try again")
       console.error('Error during registration:', error);
     }
   };

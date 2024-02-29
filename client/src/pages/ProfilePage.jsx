@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./ProfilePage.css";
 import { Cookies, useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
@@ -34,6 +34,8 @@ const fetchDataByID = async (id, isMovie) => {
   }
 };
 
+
+
 const fetchListData = async (token) => {
   try {
     console.log("token : ", token)
@@ -53,6 +55,26 @@ const fetchListData = async (token) => {
 };
 
 
+const fetchUsername = async (token) => {
+  try {
+    console.log("token : ", token)
+
+  const response = await axios.post('http://localhost:3001/getUserInfoRouter', {  },
+   {
+    headers: {
+      Authorization: `${token}` // Sending token in Authorization header
+    }
+  });
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching movie data:', error);
+    throw error;
+  }
+};
+
+
+
 
 
 
@@ -60,6 +82,9 @@ const fetchListData = async (token) => {
 export const ProfilePage = () => {
   const [category, setCategory] = useState('all');
   const [status, setStatus] = useState('all');
+  const [username, setUsername] = useState('');
+  const [image, setImage] = useState('');
+  const imgUploadRef = useRef(null);
   const [cookies, setCookie] = useCookies(['token', 'userID']);
   const navigate = useNavigate();
   // const [items, setItems] = useState([]);
@@ -101,6 +126,18 @@ export const ProfilePage = () => {
     });
 
 
+    ///////////////////////////////////////////////////
+    fetchUsername(cookies.token)
+    .then(data => {
+      console.log(data.username)
+      setImage(data.image)
+      setUsername(data.username)
+    })
+    .catch(error => {
+      console.error('Error fetching movie data:', error);
+    });
+
+
 
   }, [cookies.token]);
   
@@ -135,6 +172,37 @@ export const ProfilePage = () => {
   }
 
 
+  const updateImage = async () => {  
+    try {
+      console.log("worked fine 1")
+      const response = await axios.post('http://localhost:3001/updateUserImage', {
+        "imgbit":image
+      }, {
+        headers: {
+          Authorization: `${cookies.token}` // Sending token in Authorization header
+        }
+      });
+      console.log("worked fine 2")
+      console.log(response.data); // Log the response from the backend
+  
+    } catch (error) {
+      console.error('Error updating listuwuuuu:', error);
+    }
+  };
+  
+
+
+  const convertToBase64=(e)=>{
+    var reader= new FileReader()
+    reader.readAsDataURL(e.target.files[0])
+    reader.onload=()=>{
+      console.log(reader.result)
+      setImage(reader.result)
+    }
+    reader.onerror = error=>{
+      console.log("Converting Image Error UwU :",error)
+    }
+  }
 
   
   const handleCategoryChange = (event) => {
@@ -145,6 +213,32 @@ export const ProfilePage = () => {
     setStatus(event.target.value);
   };
 
+  const handleImgClick=()=>{
+    if (imgUploadRef.current) {
+      imgUploadRef.current.style.display = 'flex'
+    }
+  }
+
+  const handleCloseClick = () => {
+    // Handle close button click event
+    if (imgUploadRef.current) {
+      imgUploadRef.current.style.display = 'none';
+    }
+  };
+
+  const handleUploadClick = () => {
+    if(image==='' || image===null || image=="0"){
+    }else{
+      console.log(image)
+      updateImage()
+    }
+    if (imgUploadRef.current) {
+      imgUploadRef.current.style.display = 'none';
+    }
+
+  };
+
+
   return (
     <div className="pfplayout">
       <div className="logout" onClick={logoutfn}>
@@ -153,14 +247,28 @@ export const ProfilePage = () => {
       </div>
       <div className="pfp">
         <img
-          src="https://picsum.photos/800/400"
+          src={image==="0" || image==""||image==null?"https://picsum.photos/800/400":image}
           alt=""
+          onClick={handleImgClick}
           className="pfplinkbox"
         />
-        <img src="https://picsum.photos/800/400" alt="" className="blurimg" />
+        <img
+          src={image==="0" || image==""||image==null?"https://picsum.photos/800/400":image}
+          alt="" className="blurimg" />
+      </div>
+      <div className="uploadimgdiv" ref={imgUploadRef}>
+        <input 
+        accept="image/"
+        type="file" 
+        onChange={convertToBase64}
+        />
+        <div style={{marginTop:"0px"}}>
+        <button className={`btn btn-primary imgbutton`} onClick={handleUploadClick}>Upload</button>
+        <button className={`btn btn-secondary imgbutton `} onClick={handleCloseClick}> X </button>
+        </div>
       </div>
       <div className="name">
-        <strong>Username</strong>
+        <strong>{username}</strong>
       </div>
 
       <div className="mylistdiv">
@@ -217,9 +325,12 @@ export const ProfilePage = () => {
 //   return fakeData;
 // }
 function generateRandomSoftColor() {
+  // const hue = Math.floor(Math.random() * 360);
+  // const saturation = Math.floor(Math.random() * 30) + 70;
+  // const lightness = Math.floor(Math.random() * 20) + 40; 
   const hue = Math.floor(Math.random() * 360);
-  const saturation = Math.floor(Math.random() * 30) + 70; // Adjust saturation to make colors softer
-  const lightness = Math.floor(Math.random() * 20) + 40; // Adjust lightness to make colors softer and suitable for dark backgrounds
+  const saturation = Math.floor(Math.random() * 40) + 60; // Increase range from 60% to 100%
+  const lightness = Math.floor(Math.random() * 30) + 35; // Increase range from 35% to 65%
   return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 }
 
@@ -248,9 +359,9 @@ const handleNavigate = (seriesId, isMovieParam) => {
         const path = data.poster_path;
         const url = path ? `https://image.tmdb.org/t/p/w500${path}` : fallbackUrl;
         setImgUrl(url);
-        console.log(data.number_of_episodes)
+        // console.log(data.number_of_episodes)
         seteps(data.number_of_episodes)
-        console.log(data.number_of_seasons)
+        // console.log(data.number_of_seasons)
         setseason(data.number_of_seasons)
         setruntime(data.runtime)
         setepruntime(data.episode_run_time)
@@ -319,4 +430,3 @@ const handleNavigate = (seriesId, isMovieParam) => {
   );
 };
 
- 

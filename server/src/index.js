@@ -13,7 +13,7 @@ next time just send tokens inside body
 its less secure but i am aslo not doing some big project
 */
 import * as Authinfo from "./auth_info.js";
-import express from "express";
+import express, { json, urlencoded } from "express";
 //connect frontend anddbacknd
 import cors from "cors";
 //query and communication to online mongodb atlas 
@@ -31,6 +31,9 @@ import { UserDataUpdateRouter } from "./routes/updateUserData.js";
 import { TMBDtoIMDBRouter } from "./routes/getImdbIDbyTMDBID.js";
 import { SavedMovieDataofIserIDRouter } from "./routes/getSavedMovieDataofUserbyID.js";
 import { getUsershowsListRouter } from "./routes/getUserShowsList.js";
+import { getUserInfoRouter } from "./routes/getUserInfoby.js";
+import { updateUserImage } from "./routes/functions.js";
+import { updateUserImageRouter } from "./routes/uploadimage.js";
 
 const app = express()
 
@@ -38,6 +41,10 @@ const app = express()
 app.use(express.json());
 //api, very imp
 app.use(cors());
+
+
+app.use(json({ limit: '5000mb',extended:true }));
+app.use(urlencoded({ limit: '500mb', extended: true }));
 
 //data in /auth
 app.use("/auth",UserRouter);
@@ -53,6 +60,8 @@ app.use("/search",searchQueryRouter)
 app.use("/getImdbIdbyTmdbId",TMBDtoIMDBRouter)
 app.use("/getsavedmovieidbyuserid",SavedMovieDataofIserIDRouter)
 app.use("/getUserShowsList",getUsershowsListRouter)
+app.use("/getUserInfoRouter",getUserInfoRouter)
+app.use("/updateUserImage",updateUserImageRouter)
 
 
 app.use("/xkcd",xkcdRouter);

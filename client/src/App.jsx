@@ -1,6 +1,6 @@
 import { useState , useEffect, useRef} from 'react'
 import './App.css'
-import { Route, BrowserRouter as Router, Routes} from "react-router-dom"
+import { Route, BrowserRouter as Router, Routes, useLocation} from "react-router-dom"
 import { StartPage } from './pages/StartPage'
 import { LoginPage } from './pages/LoginPage'
 import { RegisterPage } from './pages/RegisterPage'
@@ -10,6 +10,8 @@ import { SearchPage } from './pages/SearchPage'
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Mvinfopage } from './pages/Mvinfopage'
+import { Cookies, useCookies } from "react-cookie";
+import axios from 'axios'
 // import {  faBars} from "@fortawesome/free-solid-svg-icons";
 // import {} from "@tre"
 
@@ -28,6 +30,30 @@ function useWindowSize() {
 
   return size;
 }
+
+
+const fetchUsername = async (token) => {
+  try {
+    console.log("token : ", token)
+
+  const response = await axios.post('http://localhost:3001/getUserInfoRouter', {  },
+   {
+    headers: {
+      Authorization: `${token}` // Sending token in Authorization header
+    }
+  });
+
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching movie data:', error);
+    throw error;
+  }
+};
+
+
+
+
+
 
 
 
@@ -95,6 +121,11 @@ const NavBar= () => {
   const [width, height] = useWindowSize();
   const navlist = useRef();
   const [isNavListVisible, setIsNavListVisible] = useState(false);
+  const [image, setImage] = useState('');
+  const cookiess = new Cookies();
+  const [cookies, setCookie] = useCookies(['token', 'userID']);
+
+
 
   const toggleNavList = () => {
     console.log("set")
@@ -105,6 +136,23 @@ const NavBar= () => {
     navigate(path);
     setIsNavListVisible(false);
   };
+  
+    
+  useEffect(() => {
+
+    fetchUsername(cookies.token)
+    .then(data => {
+      console.log(data.username)
+      setImage(data.image)
+      // setUsername(data.username)
+    })
+    .catch(error => {
+      console.error('Error fetching movie data:', error);
+    });
+
+
+
+  }, [cookies.token]);
 
   return (
     <div className='navcenterer ' >
@@ -119,6 +167,7 @@ const NavBar= () => {
 </div>
       </div>
       {
+        
         (width/height)<=0.6?
         <>
         <div className="navicon"  onClick={toggleNavList}>
@@ -126,18 +175,39 @@ const NavBar= () => {
         <path fill="#fbfcfd" d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>
         </div>
         <div className={`flex flex-col dropdownfile z-10 ${isNavListVisible ? 'visible' : 'hidden'}`} ref={navlist}>
+        <div className='randomdiv1' onClick={() => navigateAndHideNavList('/profile')}>
+                {cookies.token!==''||cookies.token!==null?
+                <img 
+                src={image==="0" || image==""||image==null?"https://picsum.photos/800/400":image}
+                alt="" 
+                className="navpfp"
+                 />
+              :
+              Login/Register
+              }
+              </div>
+          <div className="navvspace"></div>
           <div onClick={() => navigateAndHideNavList('/home')}>Home</div>
           <div className="navvspace"></div>
           <div onClick={() => navigateAndHideNavList('/search')}>Search</div>
-          <div className="navvspace"></div>
-              <div onClick={() => navigateAndHideNavList('/profile')}>Profile</div>
+
         </div>
         </>
         :
       <div className='navbaritems'>
-        <div className="navhome" onClick={() => navigate('/home')} >Home</div>
-        <div className="navsearch" onClick={() => navigate('/search')}>Search</div>
-        <div className="navprofile" onClick={() => navigate('/profile')}>Profile</div>
+        <div className="navhome dist" onClick={() => navigate('/home')} >Home</div>
+        <div className="navsearch dist" onClick={() => navigate('/search')}>Search</div>
+        <div className="navprofile dist" onClick={() => navigate('/profile')}>
+        {cookies.token?
+                <img 
+                src={image==="0" || image==""||image==null?"https://picsum.photos/800/400":image}
+                alt="" 
+                className="navpfp"
+                 />
+              :
+              "Enter"
+              }
+        </div>
       </div>
       }
 
@@ -147,6 +217,8 @@ const NavBar= () => {
     </div>
   )
 }
+
+
 
 
 export default App

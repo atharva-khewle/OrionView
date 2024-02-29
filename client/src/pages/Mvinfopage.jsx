@@ -13,8 +13,8 @@ const scrollToTop = () => {
 };
 function generateRandomSoftColor() {
   const hue = Math.floor(Math.random() * 360);
-  const saturation = Math.floor(Math.random() * 30) + 70; // Adjust saturation to make colors softer
-  const lightness = Math.floor(Math.random() * 20) + 40; // Adjust lightness to make colors softer and suitable for dark backgrounds
+  const saturation = Math.floor(Math.random() * 40) + 60; // Increase range from 60% to 100%
+  const lightness = Math.floor(Math.random() * 30) + 35; // Increase range from 35% to 65%
   return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 }
 
@@ -80,6 +80,9 @@ export const Mvinfopage = () => {
 
 
   useEffect(() => {
+    setisliked(false);
+    setStatus('none');
+
    setToken(Cookies.get('token'));
 
     if (id && isMovie !== undefined ) {
@@ -93,7 +96,7 @@ fetchMovieData(id, Cookies.get('token'))
   console.log('Movie data:', data.data.isFavorite);
   if(data.success===false){
     setisliked(false);
-    setStatus('None');
+    setStatus('none');
   }else{
     setisliked(data.data.isFavorite);
     setStatus(data.data.status);
@@ -128,6 +131,7 @@ fetchMovieData(id, Cookies.get('token'))
         }
       });
       console.log(response.data); // Log the response from the backend
+
     } catch (error) {
       console.error('Error updating list:', error);
     }
@@ -159,6 +163,11 @@ fetchMovieData(id, Cookies.get('token'))
       console.error('Error updating list:', error);
     }
   };
+
+  const handlePageChange = async()=>{
+    setisliked(false);
+    setStatus('none');
+  }
 
 
 
@@ -266,7 +275,7 @@ fetchMovieData(id, Cookies.get('token'))
 
       <div className="recgrid">
         {/* {similarData} */}
-  {similarData ? <SeriesRecGrid seriesData={similarData}/> : <div>Loading similar movies...</div>}
+  {similarData ? <SeriesRecGrid seriesData={similarData} /> : <div>Loading similar movies...</div>}
   {/* {similarData ? similarData : <div>Loading similar movies...</div>} */}
 </div>
       </div>

@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     list: [listItemSchema],
-    image: { type: String, required: false },
+    image: { type: String,required:false},
 });
 
 // Create the model from the schema and export it
