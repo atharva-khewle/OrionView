@@ -1,12 +1,32 @@
 # OrionView
 
-Welcome to the official GitHub repository for OrionView, a cutting-edge movie streaming platform designed for film enthusiasts. Our platform offers a unique and user-friendly experience, focusing on privacy and security.
+This is my first project in MERN.
 
-## Features
+## Overview
 
-- **No Gmail Authentication:** OrionView respects user privacy. We offer alternative authentication methods without relying on Gmail accounts.
-- **Enhanced Security:** All user passwords are securely encrypted, ensuring data protection and privacy.
-- **In Development:** The site is currently under active development. We're working hard to bring you a seamless and engaging movie-watching experience.
+OrionView offers:
+- Search Functionality for easy discovery.
+- Comprehensive Show Information with detailed descriptions.
+- Curated Content featuring latest, popular, and top-rated shows.
+- Personalized Profile Page to manage shows.
+- Options to mark shows as completed, watching, or wishlist.
+- Custom Sorting Options for organizing shows.
+- Recommendation System for personalized suggestions.
+- Interactive Features like liking shows.
+
+## Security
+
+OrionView places a high emphasis on security and data protection:
+
+- Token Authentication: User sessions are managed securely using tokens, reducing the risk of unauthorized access.
+- Password Encryption: All user passwords are securely hashed, ensuring data privacy and protection against potential breaches.
 
 
-token and hashed passwords used for security
+## Technologies Used
+
+OrionView leverages the following technologies:
+
+- **Frontend:** React.js for building dynamic user interfaces.
+- **Backend:** Node.js and Express.js for server-side logic and API development.
+- **Database:** MongoDB for efficient data storage and retrieval.
+- **RESTful API:** Utilized for seamless communication between the frontend and backend components.
