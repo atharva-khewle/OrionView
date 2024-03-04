@@ -1,6 +1,6 @@
 # OrionView
 
-This is my first project in MERN.
+*This project marks my first step into MERN development.*
 
 ## Overview
 
