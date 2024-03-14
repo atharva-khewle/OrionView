@@ -1,6 +1,6 @@
 # OrionView
 
-*This project marks my first step into MERN development.*
+*This project marks my first step into MERN development.It's a dynamic website designed for browsing a vast collection of movies and series.*
 
 ## Overview
 
