@@ -1,6 +1,6 @@
 # OrionView
 
-*This project marks my first step into MERN development.*
+*This project marks my first step into MERN development.It's a dynamic website designed for browsing a vast collection of movies and series.*
 
 ## Overview
 
@@ -30,3 +30,4 @@ OrionView leverages the following technologies:
 - **Backend:** Node.js and Express.js for server-side logic and API development.
 - **Database:** MongoDB for efficient data storage and retrieval.
 - **RESTful API:** Utilized for seamless communication between the frontend and backend components.
+- **API Integration:** OrionView integrates with external APIs to retrieve show data from various websites.
