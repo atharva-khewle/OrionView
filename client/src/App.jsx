@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Mvinfopage } from './pages/Mvinfopage'
 import { Cookies, useCookies } from "react-cookie";
 import axios from 'axios'
+import { MoviePlay } from './pages/MoviePlay'
 // import {  faBars} from "@fortawesome/free-solid-svg-icons";
 // import {} from "@tre"
 
@@ -45,7 +46,7 @@ const fetchUsername = async (token) => {
 
     return response.data;
   } catch (error) {
-    console.error('Error fetching movie data:', error);
+    console.error('Error fetching user data:', error);
     throw error;
   }
 };
@@ -77,6 +78,7 @@ function App() {
       <Route path="/search" element={ <SearchPage/>} />
       <Route path="/profile" element={ <ProfilePage/>} />
       <Route path="/mvinfo" element={ <Mvinfopage/>} />
+      <Route path="/mvplay" element={ <MoviePlay/>} />
     </Routes>
       </div>
       </div>

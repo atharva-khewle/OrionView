@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import "./../pages/mvinfopage.css"
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { SeriesGrid, SeriesRecGrid, useWindowSize } from './HomePage';
 import Cookies from 'js-cookie';
+import { useCookies } from 'react-cookie';
 
 const scrollToTop = () => {
   window.scrollTo({
@@ -51,6 +52,10 @@ export const Mvinfopage = () => {
   const [status, setStatus] = useState('none');
   const [color, setColor] = React.useState(generateRandomSoftColor());
   const [token, setToken] = useState('');
+  const [cookies, setCookie] = useCookies(['ismovie', 'playid']);
+  const navigate = useNavigate();
+  
+
 
 
 
@@ -171,6 +176,12 @@ fetchMovieData(id, Cookies.get('token'))
 
 
 
+   const gotoplay= ()=>{
+    console.log("hiiiiii")
+    setCookie('ismv',isMovie==="Movie"?"true":"false")
+    setCookie('playid',id)
+    navigate(`/mvplay`, { state: { id: id } });
+  }
 
 
   // const handleStatusChange = (event) => {
@@ -188,12 +199,15 @@ fetchMovieData(id, Cookies.get('token'))
   return (
     <div className='mvinfopage'>
       <div className="mvlayout">
-        <div className="mvHposterdiv">
-          <img src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`} className="mvHposter" alt="" />
+        <div className="mvHposterdiv" onClick={gotoplay}>
+          <img src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`} 
+          className="mvHposter" alt="" onClick={
+            ()=>gotoplay()
+        } />
         </div>
 
         <div className="mvVposterdiv">
-        <img src={`https://image.tmdb.org/t/p/w500${data.poster_path}`} className="mvVposter" alt="" />
+        <img src={`https://image.tmdb.org/t/p/w500${data.poster_path}`} className="mvVposter" alt="" onClick={gotoplay}/>
         </div>
 
         <div className="carmvdesc2">

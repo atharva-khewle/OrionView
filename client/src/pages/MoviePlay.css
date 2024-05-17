@@ -1,0 +1,40 @@
+.imager{
+    display: flex;
+    justify-self: center;
+    flex-direction: column;
+    /* margin-left: 100px; */
+    justify-content: center;
+    align-items: center;
+    /* background-color: rgb(80, 61, 61); */
+    width: 55vw;
+    padding: 20px;
+    height: 80vh;
+}
+
+.videoplay{
+    /* height: 30vh; */
+    aspect-ratio: 16/9;
+    min-width: 400px;
+    width: 55vw;
+}
+.submitseason{
+    background-color: blue;
+    height: 30px;
+    width: 100px;
+    border-radius: 5px;
+    margin: 15px;
+}
+
+.mvinput{
+    background-color: rgba(255, 255, 255, 0.205);
+    color: white;
+    border: none;
+    border: 1px bold white;
+    border-radius: 2px;
+    padding: 5px;
+    margin: 10px;
+}
+
+.textrightspace{
+    margin-right: 10px;
+}

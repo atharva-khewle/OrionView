@@ -53,6 +53,7 @@ export const SearchPage = () => {
       if (currQ !== query) {
         setPage(1);
         const response = await axios.get(`http://localhost:3001/search/?content=${contentType}&query=${query}&page=1`);
+        console.log("Fetched data upinhandlesearch:", response.data); // Log fetched data
         const data = response.data.results.map(item => 
           contentType === "movie" 
             ? new Movie(item.title, item.overview, item.poster_path, item.id, item.vote_average, item.vote_count, item.backdrop_path)
@@ -63,6 +64,7 @@ export const SearchPage = () => {
         setSearchResults(data);
       } else {
         const response = await axios.get(`http://localhost:3001/search/?content=${contentType}&query=${query}&page=${Page}`);
+        console.log("Fetched data downinhandlesearch:", response.data); // Log fetched data
         const data = response.data.results.map(item => 
           contentType === "movie" 
             ? new Movie(item.title, item.overview, item.poster_path, item.id, item.vote_average, item.vote_count, item.backdrop_path)
@@ -133,7 +135,7 @@ export const SearchPage = () => {
 <div className="mvpages">
 
 {
-  searchResults ?
+  searchResults.length==0  ?
   <div ></div>
   :
   <nav aria-label="Page navigation example" className="dark-mode">
