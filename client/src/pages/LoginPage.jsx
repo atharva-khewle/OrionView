@@ -3,6 +3,7 @@ import "./LoginPage.css";
 import React, { useEffect, useState } from "react";
 import { Cookies, useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
+import { currentHost } from "../App";
 
 export const LoginPage = () => {
   
@@ -12,7 +13,6 @@ export const LoginPage = () => {
   const [error, setError] = useState('');
   const [cookies, setCookie] = useCookies(['token', 'userId']);
   const navigate = useNavigate();
-
 
 
 
@@ -66,10 +66,11 @@ export const LoginPage = () => {
     e.preventDefault();
     setError('');
     try {
-      const response = await axios.post('http://localhost:3001/auth/login', {
+      const response = await axios.post(`http://${currentHost}:3001/auth/login`, {
         username: loginDetails.username,
         password: loginDetails.password
       });
+      alert(response.data.message)
       if(!response.data.token) {
         setError('Login failed');
         return
@@ -106,13 +107,16 @@ export const LoginPage = () => {
     e.preventDefault();
     setError('');
     try {
-      const response = await axios.post('http://localhost:3001/auth/register', {
+      const response = await axios.post(`http://${currentHost}:3001/auth/register`, {
         username: registerDetails.username,
         password: registerDetails.password
       });
       // Save token and userId in cookies after registration
-      setCookie('token', response.data.token, { path: '/', maxAge: 3600 * 24 * 7 }); // Expires in 7 days
-      // setCookie('userId', response.data.userID, { path: '/', maxAge: 3600 * 24 * 7 });
+      alert(response.data.message)
+      if(response.data.message==="Registerd successfully :)"){
+        setCookie('token', response.data.token, { path: '/', maxAge: 3600 * 24 * 7 }); // Expires in 7 days
+        // setCookie('userId', response.data.userID, { path: '/', maxAge: 3600 * 24 * 7 });
+      }
       console.log('Register response:', response.data);
     } catch (error) {
       // setError('Registration failed');

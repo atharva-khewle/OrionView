@@ -4,6 +4,9 @@ import axios from 'axios'
 import { json, useNavigate } from 'react-router-dom';
 import'./../pages/HomePage.css'
 import { Movie, Series } from './MediaClasses'; // Import classes from the new file
+import { currentHost } from '../App';
+
+
 
 //get six=ze frpom function
 export function useWindowSize() {
@@ -39,7 +42,7 @@ export const HomePage = () => {
 
     const getTopRatedMovies = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/topratedmovies");
+        const response = await axios.get(`http://${currentHost}:3001/topratedmovies`);
         const firstTenTopRatedMovies = response.data.results.slice(0, 10); // Get only the first 10 movies
         const moviesData = firstTenTopRatedMovies.map(item => 
           new Movie(item.title, item.overview, item.poster_path, item.id, item.vote_average, item.vote_count, item.backdrop_path)
@@ -53,7 +56,7 @@ export const HomePage = () => {
 
     const getPopSeries = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/popularseries");
+        const response = await axios.get(`http://${currentHost}:3001/popularseries`);
         const firstTenSeries = response.data.results.slice(0, 10); // Adjust number as needed
         const seriesData = firstTenSeries.map(item => 
           new Series(item.name, item.overview, item.poster_path, item.id, item.vote_average, item.vote_count, item.backdrop_path)
@@ -67,7 +70,7 @@ export const HomePage = () => {
 
     const getPopMovies = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/popularmovies");
+        const response = await axios.get(`http://${currentHost}:3001/popularmovies`);
         const firstTenMovies = response.data.results.slice(0, 10); // Get only the first 10 items
         const moviesData = firstTenMovies.map(item => 
           new Movie(item.title, item.overview, item.poster_path, item.id, item.vote_average, item.vote_count, item.backdrop_path)

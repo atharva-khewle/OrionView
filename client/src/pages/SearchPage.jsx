@@ -4,6 +4,8 @@ import { SeriesGrid, useWindowSize } from './HomePage'
 import { useState } from 'react'
 import axios from 'axios'
 import { Movie, Series } from './MediaClasses'
+import { currentHost } from '../App'
+
 
 
 
@@ -32,7 +34,7 @@ export const SearchPage = () => {
 
 
   const handlePageChange = async (newPage) => {
-    const response = await axios.get(`http://localhost:3001/search/?content=${contentType}&query=${currQ}&page=${newPage}`);
+    const response = await axios.get(`http://${currentHost}:3001/search/?content=${contentType}&query=${currQ}&page=${newPage}`);
     const data = response.data.results.map(item => 
       contentType === "movie" 
         ? new Movie(item.title, item.overview, item.poster_path, item.id, item.vote_average, item.vote_count, item.backdrop_path)
@@ -52,7 +54,7 @@ export const SearchPage = () => {
     try {
       if (currQ !== query) {
         setPage(1);
-        const response = await axios.get(`http://localhost:3001/search/?content=${contentType}&query=${query}&page=1`);
+        const response = await axios.get(`http://${currentHost}:3001/search/?content=${contentType}&query=${query}&page=1`);
         console.log("Fetched data upinhandlesearch:", response.data); // Log fetched data
         const data = response.data.results.map(item => 
           contentType === "movie" 
@@ -63,7 +65,7 @@ export const SearchPage = () => {
         setmaxPage(response.data.total_pages);
         setSearchResults(data);
       } else {
-        const response = await axios.get(`http://localhost:3001/search/?content=${contentType}&query=${query}&page=${Page}`);
+        const response = await axios.get(`http://${currentHost}:3001/search/?content=${contentType}&query=${query}&page=${Page}`);
         console.log("Fetched data downinhandlesearch:", response.data); // Log fetched data
         const data = response.data.results.map(item => 
           contentType === "movie" 

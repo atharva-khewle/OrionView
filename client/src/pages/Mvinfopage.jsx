@@ -5,6 +5,10 @@ import axios from 'axios';
 import { SeriesGrid, SeriesRecGrid, useWindowSize } from './HomePage';
 import Cookies from 'js-cookie';
 import { useCookies } from 'react-cookie';
+import { currentHost } from '../App';
+
+
+
 
 const scrollToTop = () => {
   window.scrollTo({
@@ -24,7 +28,7 @@ const fetchMovieData = async (movieId, token) => {
     console.log("id : ", movieId)
     console.log("token : ", token)
 
-  const response = await axios.post('http://localhost:3001/getsavedmovieidbyuserid', {
+  const response = await axios.post(`http://${currentHost}:3001/getsavedmovieidbyuserid`, {
     movieId: movieId
   }, {
     headers: {
@@ -67,13 +71,13 @@ export const Mvinfopage = () => {
 
   const fetchData = async () => {
     try {
-      const response2 = await axios.get(`http://localhost:3001/getdatabyid?id=${id}&ismovie=${content}`);
+      const response2 = await axios.get(`http://${currentHost}:3001/getdatabyid?id=${id}&ismovie=${content}`);
       setData(response2.data);
 
-      const response = await axios.get(`http://localhost:3001/getsimilarsbyid?id=${id}&ismovie=${content}`);
+      const response = await axios.get(`http://${currentHost}:3001/getsimilarsbyid?id=${id}&ismovie=${content}`);
       setSimilarData(response.data.results);
 
-      // const response3 = await axios.get(`http://localhost:3001/getImdbIdbyTmdbId?id=${id}&movie=${content}`);
+      // const response3 = await axios.get(`http://${currentHost}:3001/getImdbIdbyTmdbId?id=${id}&movie=${content}`);
       // const imdbIdd = response3.data.imdbId; // Assuming the response has a field named 'imdbId'
       // setImdbId(imdbIdd);
       // console.log(imdbIdd)
@@ -122,7 +126,7 @@ fetchMovieData(id, Cookies.get('token'))
     setStatus(newStatus);
 
     try {
-      const response = await axios.post('http://localhost:3001/updateList', {
+      const response = await axios.post(`http://${currentHost}:3001/updateList`, {
         movieData: {
           title: id,
           type: content === 'true' ? 'movie' : 'series',
@@ -150,7 +154,7 @@ fetchMovieData(id, Cookies.get('token'))
     console.log(!isliked)
 
     try {
-      const response = await axios.post('http://localhost:3001/updateList', {
+      const response = await axios.post(`http://${currentHost}:3001/updateList`, {
         movieData: {
           title: id,
           type: content === 'true' ? 'movie' : 'series',

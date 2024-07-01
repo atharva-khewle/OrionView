@@ -16,6 +16,7 @@ import { MoviePlay } from './pages/MoviePlay'
 // import {  faBars} from "@fortawesome/free-solid-svg-icons";
 // import {} from "@tre"
 
+export const currentHost="192.168.0.105"
 
 //get six=ze frpom function
 function useWindowSize() {
@@ -37,7 +38,7 @@ const fetchUsername = async (token) => {
   try {
     console.log("token : ", token)
 
-  const response = await axios.post('http://localhost:3001/getUserInfoRouter', {  },
+  const response = await axios.post(`http://${currentHost}:3001/getUserInfoRouter`, {  },
    {
     headers: {
       Authorization: `${token}` // Sending token in Authorization header
