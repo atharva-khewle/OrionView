@@ -1,8 +1,8 @@
 import jwt from "jsonwebtoken";
-import { secretTkn } from "../auth_info.js";
 import { UserModel } from "../models/Users.js";
 import axios from "axios";
-
+import { config } from "dotenv";
+config();
 
 export const verifyToken = (req, res, next) => {
     // console.log("verifytokenentered  ")
@@ -16,7 +16,7 @@ export const verifyToken = (req, res, next) => {
 
   
     try {
-      const decoded = jwt.verify(token, secretTkn());
+      const decoded = jwt.verify(token, process.env.SECRET_TOKEN);
       req.body.userId = decoded.id;
     //   console.log(decoded.id)
     //   console.log("jo")

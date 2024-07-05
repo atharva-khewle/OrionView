@@ -34,6 +34,7 @@ import { getUsershowsListRouter } from "./routes/getUserShowsList.js";
 import { getUserInfoRouter } from "./routes/getUserInfoby.js";
 import { updateUserImage } from "./routes/functions.js";
 import { updateUserImageRouter } from "./routes/uploadimage.js";
+import { config } from "dotenv";
 
 const app = express()
 
@@ -41,6 +42,8 @@ const app = express()
 app.use(express.json());
 //api, very imp
 app.use(cors());
+//run config to access .env
+config();
 
 
 app.use(json({ limit: '5000mb',extended:true }));
@@ -66,7 +69,7 @@ app.use("/updateUserImage",updateUserImageRouter)
 
 app.use("/xkcd",xkcdRouter);
 
-mongoose.connect(`mongodb+srv://avk:${Authinfo.mongoatlaspassfun()}@orionviewdb.ew9wgel.mongodb.net/OrionView?retryWrites=true&w=majority`) 
+mongoose.connect(`mongodb+srv://avk:${process.env.MONGOATLAS_PASSWORD}@orionviewdb.ew9wgel.mongodb.net/OrionView?retryWrites=true&w=majority`) 
 .then(() => console.log("MongoDB Connected"))
 .catch(err => console.error("MongoDB connection error:", err));
 

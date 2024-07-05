@@ -28,3 +28,4 @@ dist-ssr
 ccc.js
 auth_info.js
 MoviePlay.jsx
+.env

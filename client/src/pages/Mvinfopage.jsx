@@ -198,20 +198,29 @@ fetchMovieData(id, Cookies.get('token'))
   if (!data) {
     return <div>Loading...</div>;
   }
+  const fallbackUrl = './../../assets/gostudy3.webp';
+  const fallbackUrl2 = './../../assets/gostudy.webp';
+
 
   // Rest of your component rendering logic
   return (
     <div className='mvinfopage'>
       <div className="mvlayout">
         <div className="mvHposterdiv" onClick={gotoplay}>
-          <img src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`} 
+          <img 
+          src={`https://image.tmdb.org/t/p/original${data.backdrop_path}`} 
+          onError={(e) => e.target.src = fallbackUrl} 
           className="mvHposter" alt="" onClick={
             ()=>gotoplay()
         } />
         </div>
 
         <div className="mvVposterdiv">
-        <img src={`https://image.tmdb.org/t/p/w500${data.poster_path}`} className="mvVposter" alt="" onClick={gotoplay}/>
+        <img 
+        src={`https://image.tmdb.org/t/p/w500${data.poster_path}`} 
+        onError={(e) => e.target.src = fallbackUrl2} 
+        className="mvVposter" alt="" 
+        onClick={gotoplay}/>
         </div>
 
         <div className="carmvdesc2">

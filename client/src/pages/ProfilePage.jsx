@@ -346,7 +346,7 @@ const ChildComponent = ({ item }) => {
   const [season,setseason]= useState('')
   const[runtime,setruntime]=useState('')
   const[epruntime,setepruntime]=useState('')
-  const fallbackUrl = './../../assets/notfound2.png';
+  const fallbackUrl = './../../assets/notfound2.webp';
   const [color, setColor] = React.useState(generateRandomSoftColor());
 const navigate = useNavigate();
   

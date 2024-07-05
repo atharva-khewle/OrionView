@@ -238,7 +238,7 @@ export const SeriesGrid = ({ seriesData }) => {
       {seriesData.map((series, index) => {
 
         const url = `https://image.tmdb.org/t/p/w500${series.poster_path}`;
-        const fallbackUrl = './../../assets/notfound2.png';
+        const fallbackUrl = './../../assets/notfound2.webp';
 
         return (
           <div key={index} className='card cscale' onClick={() => handleNavigate(series.id, isthisMovie(series))}>
@@ -246,8 +246,8 @@ export const SeriesGrid = ({ seriesData }) => {
               <img 
                 src={url} 
                 onError={(e) => e.target.src = fallbackUrl} 
-                className='cardimg' 
                 alt={series.title || 'Image not available'} 
+                className='cardimg' 
               />
             </div>
             <div className="carddesc">
@@ -292,7 +292,7 @@ export const SeriesRecGrid = ({ seriesData }) => {
       {seriesData.map((series, index) => {
 
         const url = `https://image.tmdb.org/t/p/w500${series.poster_path}`;
-        const fallbackUrl = './../../assets/notfound2.png';
+        const fallbackUrl = './../../assets/notfound2.webp';
 
         return (
           <div key={index} className='card cscale' onClick={() => handleNavigate(series.id,series.title?"Movie":"TV")}>

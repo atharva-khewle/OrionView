@@ -3,8 +3,9 @@ import {UserModel} from "../models/Users.js";
 import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { secretTkn } from "../auth_info.js";
-
+import { config } from "dotenv";
+config();
+console.log("from userjs.js",process.env.SECRET_TOKEN);
 
 const router = express.Router();
 
@@ -39,7 +40,7 @@ await newUserquery.save();
 const userinfo = await UserModel.findOne({username});
 
 ////////////////////// userinfo._id gives us id with what the object si saved
-const token = jwt.sign({id : userinfo._id} , secretTkn())
+const token = jwt.sign({id : userinfo._id} , process.env.SECRET_TOKEN)
 
 
 //should only  give 1 response
@@ -68,7 +69,7 @@ router.post("/login",async(req,res)=>{
                 return res.json({message:"Incorrect Password or username :( "})
             }
     
-            const token = jwt.sign({id : userinfo._id} , secretTkn())
+            const token = jwt.sign({id : userinfo._id} , process.env.SECRET_TOKEN)
     
             res.json({
                 message:"Logged In successfully :)",

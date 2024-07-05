@@ -3,7 +3,6 @@ import {UserModel} from "../models/Users.js";
 import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
-import { secretTkn } from "../auth_info.js";
 import { addOrUpdateMovieToListByUserId, updateUserImage, verifyToken } from "./functions.js";
 
 
