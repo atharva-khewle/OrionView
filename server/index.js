@@ -39,16 +39,19 @@ import { isApiWorking } from "./routes/isApiWorking.js";
 
 const app = express()
 
-//convert fronted tp nackend
-app.use(express.json());
+
 //api, very imp
 app.use(cors(
     {
-        origin:["url"],
+        origin:["http://localhost:5173"],
         methods:["POST","GET"],
         credentials:true
     }
 ));
+
+//convert fronted tp nackend
+app.use(express.json());
+
 //run config to access .env
 config();
 

@@ -5,7 +5,6 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { config } from "dotenv";
 config();
-console.log("from userjs.js",process.env.SECRET_TOKEN);
 
 const router = express.Router();
 
