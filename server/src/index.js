@@ -35,19 +35,28 @@ import { getUserInfoRouter } from "./routes/getUserInfoby.js";
 import { updateUserImage } from "./routes/functions.js";
 import { updateUserImageRouter } from "./routes/uploadimage.js";
 import { config } from "dotenv";
+import { isApiWorking } from "./routes/isApiWorking.js";
 
 const app = express()
 
 //convert fronted tp nackend
 app.use(express.json());
 //api, very imp
-app.use(cors());
+app.use(cors(
+    {
+        origin:["url"],
+        methods:["POST","GET"],
+        credentials:true
+    }
+));
 //run config to access .env
 config();
 
 
 app.use(json({ limit: '5000mb',extended:true }));
 app.use(urlencoded({ limit: '500mb', extended: true }));
+
+app.use("/",isApiWorking)
 
 //data in /auth
 app.use("/auth",UserRouter);

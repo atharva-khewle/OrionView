@@ -181,10 +181,15 @@ fetchMovieData(id, Cookies.get('token'))
 
 
    const gotoplay= ()=>{
-    console.log("hiiiiii")
-    setCookie('ismv',isMovie==="Movie"?"true":"false")
-    setCookie('playid',id)
-    navigate(`/mvplay`, { state: { id: id } });
+    if(cookies.code_word === import.meta.env.VITE_CODE_WORD){
+      //GO IN
+      setCookie('ismv',isMovie==="Movie"?"true":"false")
+      setCookie('playid',id)
+      navigate(`/mvplay`, { state: { id: id } });
+    }else{
+      console.log("WRONG CODE WORD")
+    }
+
   }
 
 

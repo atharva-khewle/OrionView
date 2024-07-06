@@ -13,6 +13,7 @@ import { Mvinfopage } from './pages/Mvinfopage'
 import { Cookies, useCookies } from "react-cookie";
 import axios from 'axios'
 import { MoviePlay } from './pages/MoviePlay'
+import MagicContainer from './pages/MagicContainer'
 // import {  faBars} from "@fortawesome/free-solid-svg-icons";
 // import {} from "@tre"
 
@@ -61,9 +62,10 @@ const fetchUsername = async (token) => {
 
 
 function App() {
+  const [cookies, setCookie] = useCookies();
   const [width, height] = useWindowSize();
-  
-  return (
+
+    return (
   <div className='canvas'>
     <div>
   <Router>
@@ -73,9 +75,9 @@ function App() {
       <div className="pageview">
       <Routes>
       <Route path="/" element={ <HomePage/>} />
+      <Route path="/home" element={ <HomePage/>} />
       <Route path="/register" element={ <RegisterPage/>} />
       <Route path="/login" element={ <LoginPage/>} />
-      <Route path="/home" element={ <HomePage/>} />
       <Route path="/search" element={ <SearchPage/>} />
       <Route path="/profile" element={ <ProfilePage/>} />
       <Route path="/mvinfo" element={ <Mvinfopage/>} />
@@ -84,6 +86,12 @@ function App() {
       </div>
       </div>
       <Footer/>
+      {
+        cookies.code_word===undefined?
+      <MagicContainer></MagicContainer>
+      :
+      <div></div>
+      }
 
 
   </Router>
