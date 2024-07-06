@@ -43,7 +43,7 @@ const app = express()
 //api, very imp
 app.use(cors(
     {
-        origin:["https://orion-view-api.vercel.app/"],
+        origin:["http://localhost:5173"],
         methods:["POST","GET"],
         credentials:true
     }
