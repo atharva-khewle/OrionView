@@ -21,7 +21,7 @@ class ShowData {
 const fetchDataByID = async (id, isMovie) => {
   try {
     // Make Axios API request
-    const response = await axios.get(`http://${currentHost}/getdatabyid`, {
+    const response = await axios.get(`${currentHost}/getdatabyid`, {
       params: {
         id: id,
         ismovie: isMovie // Assuming 'ismovie' is the correct parameter name
@@ -43,7 +43,7 @@ const fetchListData = async (token) => {
   try {
     console.log("token : ", token)
 
-  const response = await axios.post(`http://${currentHost}/getUserShowsList`, {  },
+  const response = await axios.post(`${currentHost}/getUserShowsList`, {  },
    {
     headers: {
       Authorization: `${token}` // Sending token in Authorization header
@@ -62,7 +62,7 @@ const fetchUsername = async (token) => {
   try {
     console.log("token : ", token)
 
-  const response = await axios.post(`http://${currentHost}/getUserInfoRouter`, {  },
+  const response = await axios.post(`${currentHost}/getUserInfoRouter`, {  },
    {
     headers: {
       Authorization: `${token}` // Sending token in Authorization header
@@ -178,7 +178,7 @@ export const ProfilePage = () => {
   const updateImage = async () => {  
     try {
       console.log("worked fine 1")
-      const response = await axios.post(`http://${currentHost}/updateUserImage`, {
+      const response = await axios.post(`${currentHost}/updateUserImage`, {
         "imgbit":image
       }, {
         headers: {

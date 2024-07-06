@@ -28,7 +28,7 @@ const fetchMovieData = async (movieId, token) => {
     console.log("id : ", movieId)
     console.log("token : ", token)
 
-  const response = await axios.post(`http://${currentHost}/getsavedmovieidbyuserid`, {
+  const response = await axios.post(`${currentHost}/getsavedmovieidbyuserid`, {
     movieId: movieId
   }, {
     headers: {
@@ -71,13 +71,13 @@ export const Mvinfopage = () => {
 
   const fetchData = async () => {
     try {
-      const response2 = await axios.get(`http://${currentHost}/getdatabyid?id=${id}&ismovie=${content}`);
+      const response2 = await axios.get(`${currentHost}/getdatabyid?id=${id}&ismovie=${content}`);
       setData(response2.data);
 
-      const response = await axios.get(`http://${currentHost}/getsimilarsbyid?id=${id}&ismovie=${content}`);
+      const response = await axios.get(`${currentHost}/getsimilarsbyid?id=${id}&ismovie=${content}`);
       setSimilarData(response.data.results);
 
-      // const response3 = await axios.get(`http://${currentHost}/getImdbIdbyTmdbId?id=${id}&movie=${content}`);
+      // const response3 = await axios.get(`${currentHost}/getImdbIdbyTmdbId?id=${id}&movie=${content}`);
       // const imdbIdd = response3.data.imdbId; // Assuming the response has a field named 'imdbId'
       // setImdbId(imdbIdd);
       // console.log(imdbIdd)
@@ -126,7 +126,7 @@ fetchMovieData(id, Cookies.get('token'))
     setStatus(newStatus);
 
     try {
-      const response = await axios.post(`http://${currentHost}/updateList`, {
+      const response = await axios.post(`${currentHost}/updateList`, {
         movieData: {
           title: id,
           type: content === 'true' ? 'movie' : 'series',
@@ -154,7 +154,7 @@ fetchMovieData(id, Cookies.get('token'))
     console.log(!isliked)
 
     try {
-      const response = await axios.post(`http://${currentHost}/updateList`, {
+      const response = await axios.post(`${currentHost}/updateList`, {
         movieData: {
           title: id,
           type: content === 'true' ? 'movie' : 'series',
