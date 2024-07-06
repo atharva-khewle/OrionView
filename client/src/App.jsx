@@ -17,7 +17,7 @@ import MagicContainer from './pages/MagicContainer'
 // import {  faBars} from "@fortawesome/free-solid-svg-icons";
 // import {} from "@tre"
 
-export const currentHost="192.168.0.105"
+export const currentHost=import.meta.env.VITE_API_SERVER_LINK;
 
 //get six=ze frpom function
 function useWindowSize() {
