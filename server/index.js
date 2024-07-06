@@ -12,7 +12,6 @@ headers can only go in post not in get
 next time just send tokens inside body
 its less secure but i am aslo not doing some big project
 */
-import * as Authinfo from "./auth_info.js";
 import express, { json, urlencoded } from "express";
 //connect frontend anddbacknd
 import cors from "cors";
@@ -32,7 +31,7 @@ import { TMBDtoIMDBRouter } from "./routes/getImdbIDbyTMDBID.js";
 import { SavedMovieDataofIserIDRouter } from "./routes/getSavedMovieDataofUserbyID.js";
 import { getUsershowsListRouter } from "./routes/getUserShowsList.js";
 import { getUserInfoRouter } from "./routes/getUserInfoby.js";
-import { updateUserImage } from "./routes/functions.js";
+// import { updateUserImage } from "./routes/functions.js";
 import { updateUserImageRouter } from "./routes/uploadimage.js";
 import { config } from "dotenv";
 import { isApiWorking } from "./routes/isApiWorking.js";
