@@ -39,7 +39,7 @@ const fetchUsername = async (token) => {
   try {
     console.log("token : ", token)
 
-  const response = await axios.post(`http://${currentHost}:3001/getUserInfoRouter`, {  },
+  const response = await axios.post(`http://${currentHost}/getUserInfoRouter`, {  },
    {
     headers: {
       Authorization: `${token}` // Sending token in Authorization header

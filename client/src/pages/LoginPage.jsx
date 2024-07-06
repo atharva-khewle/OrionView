@@ -66,7 +66,7 @@ export const LoginPage = () => {
     e.preventDefault();
     setError('');
     try {
-      const response = await axios.post(`http://${currentHost}:3001/auth/login`, {
+      const response = await axios.post(`http://${currentHost}/auth/login`, {
         username: loginDetails.username,
         password: loginDetails.password
       });
@@ -107,7 +107,7 @@ export const LoginPage = () => {
     e.preventDefault();
     setError('');
     try {
-      const response = await axios.post(`http://${currentHost}:3001/auth/register`, {
+      const response = await axios.post(`http://${currentHost}/auth/register`, {
         username: registerDetails.username,
         password: registerDetails.password
       });
