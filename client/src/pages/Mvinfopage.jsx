@@ -6,6 +6,8 @@ import { SeriesGrid, SeriesRecGrid, useWindowSize } from './HomePage';
 import Cookies from 'js-cookie';
 import { useCookies } from 'react-cookie';
 import { currentHost } from '../App';
+import { secretHash } from './MoviePlay';
+import { SHA256 } from 'crypto-js';
 
 
 
@@ -181,12 +183,14 @@ fetchMovieData(id, Cookies.get('token'))
 
 
    const gotoplay= ()=>{
-    if(cookies.code_word === import.meta.env.VITE_CODE_WORD){
+    const codeWordHash = SHA256(cookies.code_word).toString();
+    if(secretHash===codeWordHash){
       //GO IN
       setCookie('ismv',isMovie==="Movie"?"true":"false")
       setCookie('playid',id)
       navigate(`/mvplay`, { state: { id: id } });
     }else{
+      console.log(import.meta.env.VITE_CODE_WORD)
       console.log("WRONG CODE WORD")
     }
 
