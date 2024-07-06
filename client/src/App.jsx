@@ -17,7 +17,7 @@ import MagicContainer from './pages/MagicContainer'
 // import {  faBars} from "@fortawesome/free-solid-svg-icons";
 // import {} from "@tre"
 
-export const currentHost=import.meta.env.VITE_API_SERVER_LINK;
+export const currentHost="https://orionview-2.onrender.com";
 
 //get six=ze frpom function
 function useWindowSize() {
