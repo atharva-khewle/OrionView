@@ -23,7 +23,7 @@ https://orion-view-frontend.vercel.app (WILL WORK AFTER FEW DAYS)
 
 
 ## FEATURES
-- open the website 😊. too many to tell here
+- open the website. cant tell all the features
 
 ## Screenshots
 
