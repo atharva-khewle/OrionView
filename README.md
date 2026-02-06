@@ -17,7 +17,8 @@ https://orion-view-frontend.vercel.app (WILL WORK AFTER FEW DAYS)
 
 
 
-
+- proof of work for movie streaming from the things available on internet
+- it is just a proof of work and learning expirence 
 
 
 
