@@ -1,8 +1,9 @@
 # OrionView
 
-*This project marks my first step into MERN development. It's a dynamic website designed for browsing a vast collection of movies and series.*
+NEW WORKING URL: https://orion-view-frontend-v2.vercel.app/
 
-**[Link to live website](https://orion-view-frontend.vercel.app/)**
+OLD URL : https://orion-view-frontend.vercel.app/ (WILL WORK AFTER FEW DAYS)
+
 
 ## Overview
 
