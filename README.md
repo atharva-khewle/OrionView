@@ -1,11 +1,11 @@
 # OrionView
 
-NEW WORKING URL: 
+## NEW WORKING URL: 
 https://orion-view-frontend-v2.vercel.app
 
 
 
-OLD NOT WORKING URL : 
+## OLD NOT WORKING URL : 
 https://orion-view-frontend.vercel.app (WILL WORK AFTER FEW DAYS)
 
 
@@ -17,14 +17,12 @@ https://orion-view-frontend.vercel.app (WILL WORK AFTER FEW DAYS)
 
 
 
+## hello
+
 - proof of work for movie streaming from the things available on internet
-- it is just a proof of work and learning expirence 
-
-
-
-
-## FEATURES
 - open the website. cant tell all the features
+
+
 
 ## Screenshots
 
