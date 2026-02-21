@@ -1,14 +1,12 @@
 # OrionView
 
-## NEW WORKING URL: 
+## NEW URLs: 
 - https://orion-view-frontend-v1.vercel.app
 - https://orion-view-frontend-v2.vercel.app
 - https://orion-view-frontend-v3.vercel.app
 
 
 
-## OLD NOT WORKING URL : 
-https://orion-view-frontend.vercel.app (WILL WORK AFTER FEW DAYS)
 
 
 
